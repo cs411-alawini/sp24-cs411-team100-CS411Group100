@@ -1,4 +1,5 @@
 # DollarIQ
+#A smart way to efficiently introspect personal finance
 
 ## Project Summary
 
