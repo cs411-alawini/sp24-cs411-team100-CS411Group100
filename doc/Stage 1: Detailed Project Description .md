@@ -1,8 +1,8 @@
-# WiseWallet
+# DollarIQ
 
 ## Project Summary
 
-WiseWallet is a financial web app designed to enhance personal finance management by offering detailed insights into users' spending habits. It provides analytics on purchase categories, transaction frequency, and demographic trends, alongside comparisons to average user profiles and their spending habits based on personalized filters. This proactive approach not only helps in better managing expenses but also in identifying potential savings opportunities, making WiseWallet a versatile companion in the journey towards financial independence and security.
+DollarIQ is a financial web app designed to enhance personal finance management by offering detailed insights into users' spending habits. It provides analytics on purchase categories, transaction frequency, and demographic trends, alongside comparisons to average user profiles and their spending habits based on personalized filters. This proactive approach not only helps in better managing expenses but also in identifying potential savings opportunities, making WiseWallet a versatile companion in the journey towards financial independence and security.
 
 The webapp also aids users in achieving their financial goals, supports money transfers, and seamlessly connects users to their centralized bank accounts for a comprehensive banking experience.
 
@@ -22,11 +22,11 @@ Our aim is to empower customers with tools for better financial management in a 
 
 1) The web app features an AI-powered search analytics tool, enabling users to delve into their data through a search bar where inputs can be delivered through natural language. Queries entered are automatically converted into SQL, allowing for in-depth analysis directly from the database. The tool also displays liveaboards and visualizations of data for a comprehensive analytics experience.
 
-We aim to integrate Thoughtspot, an AI-driven Business Intelligence tool, into our platform. Thoughtspot offers advanced querying capabilities through natural language and generates visualizations by analyzing data types. This tool will be directly connected to our system's backend database, enabling seamless data display on our website for enhanced user experience.
+    We aim to integrate Thoughtspot, an AI-driven Business Intelligence tool, into our platform. Thoughtspot offers advanced querying capabilities through natural language and generates visualizations by analyzing data types. This tool will be directly connected to our system's backend database, enabling seamless data display on our website for enhanced user experience.
 
 2) The platform also offers a feature that lets users compare their spending with that of average users, with customizable filters for age group, demographics, income level, occupation, etc. .This allows users to explore and experiment with various data combinations to gain insights tailored to their interests.
 
-Our approach involves crafting dynamic SQL queries tailored to user-selected filters, utilizing cursors and subqueries to organize data by various preferences. We'll develop code to dynamically adjust these queries in response to user choices, ensuring a flexible and seamless experience. This process will incorporate the use of Python scripts, enabling real-time query modification based on user inputs, to deliver a personalized and efficient data interaction.
+    Our approach involves crafting dynamic SQL queries tailored to user-selected filters, utilizing cursors and subqueries to organize data by various preferences. We'll develop code to dynamically adjust these queries in response to user choices, ensuring a flexible and seamless experience. This process will incorporate the use of Python scripts, enabling real-time query modification based on user inputs, to deliver a personalized and efficient data interaction.
 
 ## Usefulness
 
@@ -71,9 +71,14 @@ The Admin page would have some options to access statistics about users, add/rem
 
 ### UI Mockup
 
-[!login1](https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/login.png)
-[!login2](https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/login2.png)
-[!main dashboard](https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/user.png)
+#### Login Screen 1
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/login.png" alt="Alt text" width="600">
+
+#### Login Screen 2
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/login2.png" alt="Alt text" width="600">
+
+#### Main User Dashboard
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/user.png" alt="Alt text" width="600">
 
 ### Project Work Distribution:
 
