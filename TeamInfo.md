@@ -25,4 +25,6 @@
 
 ## Project Summary
 
-This is a summary of the project!
+DollarIQ is a financial web app designed to enhance personal finance management by offering detailed insights into users' spending habits. It provides analytics on purchase categories, transaction frequency, and demographic trends, alongside comparisons to average user profiles and their spending habits based on personalized filters. This proactive approach not only helps in better managing expenses but also in identifying potential savings opportunities, making WiseWallet a versatile companion in the journey towards financial independence and security.
+
+The application also aids users in achieving their financial goals, supports money transfers, and seamlessly connects users to their centralized bank accounts for a comprehensive banking experience.
