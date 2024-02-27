@@ -1,6 +1,6 @@
 # DollarIQ: Database Design
 
-<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/schema.png" alt="Alt text" width="600">
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/schema.png" alt="Alt text" width="900">
 
 ## Entities Explanation
 
@@ -43,13 +43,16 @@ The transaction table contains comprehensive details of all transactions. It rec
 Transaction Mode for our bank would be card, cheque, bank transfer, etc. We have separated this entity from the main transactions table because it will prevent deletion anomalies in the database. We will also be able to add any new mode of transaction here without adding a new column to the Transactions entity. So the attributes of this table are Mode ID (Primary Key) and Mode Type. 
 
 #### 11. Transaction Type
+This entity also exists to prevent any deletion anomalies in our Transaction table. As the name suggests, this table will allow us to maintain the purpose for each transaction e.g. groceries, leisure activities, etc. The attributes of this entity are Transaction ID and Type. It has a one-to-many relation with the Transactions table because each type of transaction can be related to multiple transactions.
 
 ##### 12. Loan
 Since loan request is an add-on feature on our website we have decided to keep it as a separate entity. Each Account can be linked to 0 or more loans but each loan can be related to only one account. Hence, the relationship between Loan and Account is one-to-one. It consists of multiple attributes like Loan ID (which is the Primary Key), Date, Amount, Duration, Payments and loan status.
 
 ##### 13. Loan Repayment
+This table is separated because it allows us to easily track the number of repayments each user has made for each loan they have taken. So the unique Primary Key for this table is the Repayment ID and the attributes are Loan ID and Transaction ID. This entity is related to two other tables. It is related to the transactions table via a one-to-one relation since each loan repayment is also a transaction. It is also related to the Loan entity via a one-to-one relation since each loan repayment is only related to one loan.
 
 ##### 14. Loan Type
+We have separated the loan type into a different entity because it prevents any deletion anomalies and it also allows us to maintain all different types of loan types like mortgage, car loan, credit card loan, etc. in a single table. It has a one-to-many relation since each type can be related to multiple loans. This entity contains the Loan Type ID, Type, and Interest Rate as the attributes. 
 
 ## Cardinality
 - Employee to User: one-to-one (Each employee is associated with exactly one user)
@@ -77,5 +80,35 @@ Since loan request is an add-on feature on our website we have decided to keep i
 - Unified Ledger Concept: Financial activities, including loan repayments, are recorded as transactions.
 
 ## Normalization
+Our database is in BCNF because for each functional dependency X → Y in our schema, X is a Super Key and the entire schema is also in 3NF because every non-key attribute in a table is functionally dependent on the primary key.
+We have chosen BCNF over 3NF for our Database design because BCNF eliminates all anomalies resulting from functional dependencies by ensuring that every determinant is a candidate key. This leads to a much better guarantee against insertion, update, and deletion anomalies that could occur when updating multiple tables in our database. Also since BCNF requires that all functional dependencies are on keys, it will ensure a higher level of data integrity.
+
 
 ## Relational Schema
+- User: UserID (Primary Key) (INT), Password (VARCHAR), DateOfBirth (DATE), Gender (VARCHAR)
+
+- Employee: EmployeeID (Primary Key) (INT), UserID (Foreign Key) (INT), RoleID (Foreign Key) (INT)
+
+- Role: RoleID (Primary Key) (INT), RoleName (VARCHAR), AccessType (VARCHAR)
+
+- Credit Score: UserID (Primary Key) (INT), CreditScore (INT), DateLastUpdated (DATE)
+
+- Account: AccountID (Primary Key) (INT), UserID (Foreign Key) (INT), DistrictID (Foreign Key) (INT), DateCreated (DATE)
+
+- District: DistrictID (Primary Key) (INT), DistrictName (VARCHAR), Region (VARCHAR)
+
+- District Stats: StatID (Primary Key) (INT), DistrictID (Foreign Key) (INT), MetricID (Foreign Key) (INT), Values (DECIMAL)
+
+- District Metric Type: MetricID (Primary Key) (INT), Type (VARCHAR)
+
+- Transactions: TransactionID (Primary Key) (INT), SenderAccountID (INT), ReceiverAccountID (INT), Date (DATE), TransactionTypeID (Foreign Key) (INT),TransactionModeID (Foreign Key) (INT), Amount (DECIMAL)
+
+- Transaction Mode: ModeID (Primary Key) (INT), ModeType (VARCHAR)
+
+- Transaction Type: TransactionTypeID (Primary Key) (INT), Type (VARCHAR)
+
+- Loan: LoanID (Primary Key) (INT), AccountID (Foreign Key) (INT), Date (DATE), Amount (DECIMAL), LoanTypeID (Foreign Key) (INT), Duration (INT)
+
+- Loan Repayment: RepaymentID (Primary Key) (INT), LoanID (Foreign Key) (INT), TransactionID (Foreign Key) (INT)
+
+- Loan Type: LoanTypeID (Primary Key) (INT), Type (VARCHAR)
