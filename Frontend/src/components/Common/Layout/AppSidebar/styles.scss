@@ -1,0 +1,38 @@
+.app-sidebar {
+  padding: 0;
+  background-color: #0e416c !important;
+  .app-sidebar-list {
+    width: 100%;
+
+    .app-sidebar-listitem {
+      padding: 0;
+      border: none;
+      background-color: #0e416c !important;
+      &.list-group-item:hover {
+        .nav-link {
+          background-color: #0c77be !important;
+          color: black;
+          .left-nav-icon {
+            color: black !important;
+          }
+        }
+        svg {
+          filter: invert(1) !important;
+        }
+      }
+      .nav-link {
+        width: 100%;
+        color: white;
+        .left-nav-icon {
+          color: white !important;
+        }
+        &.active {
+          background-color: #0c77be;
+        }
+        &.hover {
+          background-color: black !important;
+        }
+      }
+    }
+  }
+}

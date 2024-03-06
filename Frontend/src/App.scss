@@ -1,0 +1,74 @@
+.app-container {
+  min-height: 100vh;
+}
+
+.table {
+  background-color: #ffff;
+}
+.main-tab-content {
+  padding: 1rem;
+  background-color: #f3f3f7;
+  width: calc(100vw - 60px);
+  height: calc(100vh - 50px);
+  overflow-y: auto;
+  position: relative;
+  overflow-x: hidden;
+}
+.home-icon {
+  color: rgb(37, 42, 46);
+  height: 20px;
+  width: 20px;
+  margin-bottom: 2px;
+}
+.cost-container {
+  &:hover::after {
+    visibility: visible;
+  }
+
+  &::after {
+    visibility: hidden;
+    content: attr(data-title);
+    background-color: #333333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: var(--title-padding);
+    opacity: 0.7;
+
+    /* Position the tooltip */
+    position: fixed;
+    top: var(--mouse-y);
+    left: var(--mouse-x);
+    z-index: 1;
+  }
+}
+.overflow-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover::after {
+    visibility: visible;
+  }
+
+  &::after {
+    visibility: hidden;
+    content: attr(data-tooltip);
+    background-color: #333333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 8px;
+    opacity: 0.7;
+
+    /* Position the tooltip */
+    position: fixed;
+    top: var(--mouse-y);
+    left: var(--mouse-x);
+    z-index: 1;
+  }
+}
+
+.sticky-top{
+  z-index: 0 !important;
+}
