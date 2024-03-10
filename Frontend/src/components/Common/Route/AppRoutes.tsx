@@ -1,14 +1,14 @@
 import { Suspense, lazy } from "react";
 import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
+    Navigate,
+    Route,
+    BrowserRouter as Router,
+    Routes,
 } from "react-router-dom";
 const Home = lazy(() => import("../../../features/Feature1"));
 const ProgressIndicator = lazy(() => import("../UI/ProgressIndicator"));
 const PageNotFound = lazy(
-  () => import("../../../components/Common/UI/PageNotFound")
+  () => import("../UI/PageNotFound")
 );
 const AppSideBar = lazy(() => import("../Layout/AppSidebar"));
 
