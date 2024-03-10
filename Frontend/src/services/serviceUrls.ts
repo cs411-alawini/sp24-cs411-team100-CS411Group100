@@ -1,4 +1,4 @@
-import Environment from "./../config/environment";
+import Environment from "../config/environment";
 export const apiURL = Environment.apiURL;
 
 const serviceUrls = {

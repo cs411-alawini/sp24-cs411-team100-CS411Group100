@@ -1,5 +1,5 @@
+import Environment from '../config/environment';
 import { removeItem } from '../utils/localStorage';
-import Environment from './../config/environment';
 // import { accessTokenLocalStorageKey, getAccessTokenFromUrl, logout } from '../components/Authorization';
 
 let accessToken: string = '';
