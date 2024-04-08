@@ -207,3 +207,13 @@ tt.Type;
 ```
 
 ## Part 2: Indexing
+
+### Query 1
+For this query, the `DateOfBirth` and `Gender` attributes in the `User` table were indexed.
+
+| Index Config | Cost |
+|--------------|------|
+| No Index           | 0.00 |
+| DOB Index          | 0.00 |
+| Gender Index       | 0.00 |
+| DOB + Gender Index | 0.00
