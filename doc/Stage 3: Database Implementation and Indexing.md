@@ -1,6 +1,6 @@
 # Dollar IQ: Database Implementation & Indexing
 
-## Part 1: Implementation and Subqueries
+## Part 1: DDL and Complex Queries
 
 ### Tables
 
@@ -205,3 +205,5 @@ WHERE
 GROUP BY
 tt.Type;
 ```
+
+## Part 2: Indexing
