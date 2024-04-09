@@ -204,6 +204,42 @@ CREATE TABLE LoanRepayment (
     FOREIGN KEY (LoanID) REFERENCES Loan(LoanID)
 ```
 
+### Number of Rows
+
+The following query was used to find the number of rows in each table:
+
+```sql
+SELECT 'Account' AS TableName, COUNT(*) AS NumberOfRows FROM Account
+UNION ALL
+SELECT 'CreditScore' AS TableName, COUNT(*) AS NumberOfRows FROM CreditScore
+UNION ALL
+SELECT 'District' AS TableName, COUNT(*) AS NumberOfRows FROM District
+UNION ALL
+SELECT 'DistrictMetricType' AS TableName, COUNT(*) AS NumberOfRows FROM DistrictMetricType
+UNION ALL
+SELECT 'DistrictStats' AS TableName, COUNT(*) AS NumberOfRows FROM DistrictStats
+UNION ALL
+SELECT 'Employee' AS TableName, COUNT(*) AS NumberOfRows FROM Employee
+UNION ALL
+SELECT 'Loan' AS TableName, COUNT(*) AS NumberOfRows FROM Loan
+UNION ALL
+SELECT 'LoanRepayment' AS TableName, COUNT(*) AS NumberOfRows FROM LoanRepayment
+UNION ALL
+SELECT 'LoanType' AS TableName, COUNT(*) AS NumberOfRows FROM LoanType
+UNION ALL
+SELECT 'Role' AS TableName, COUNT(*) AS NumberOfRows FROM Role
+UNION ALL
+SELECT 'TransactionMode' AS TableName, COUNT(*) AS NumberOfRows FROM TransactionMode
+UNION ALL
+SELECT 'TransactionType' AS TableName, COUNT(*) AS NumberOfRows FROM TransactionType
+UNION ALL
+SELECT 'Transactions' AS TableName, COUNT(*) AS NumberOfRows FROM Transactions
+UNION ALL
+SELECT 'User' AS TableName, COUNT(*) AS NumberOfRows FROM User;
+```
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/rows.png" alt="Alt text" width="600">
+
 3 of the tables have atleast 1000 rows as required:
 | Table         | Rows   |
 |---------------|--------|
@@ -239,6 +275,8 @@ GROUP BY
 tt.Type;
 ```
 
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/query1.png" alt="Alt text" width="600">
+
 #### Query 2
 This query retrieves information about users and their accounts, focusing on balances and credit scores. It links `User` details with their `Accounts` and `CreditScores`, filtering accounts with balances higher than the average for their district and users with credit scores higher than the overall average. The query ensures only active accounts and users are considered. Essentially, it helps identify users with above-average financial standings, potentially useful for targeted analysis or decision-making.
 ```sql
@@ -266,6 +304,8 @@ AND A.IsDeleted = FALSE
 AND U.IsDeleted = FALSE;
 ```
 
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/query2.png" alt="Alt text" width="600">
+
 #### Query 3
 This query provides a snapshot of how much money, on average, men and women have in their bank accounts across different areas. It looks at each area's name and how many people live there, then breaks down the average amount of money in accounts by whether the account holder is male or female. It makes sure to only consider accounts and people that are currently active (not deleted) and organizes the results by area, how big each area is, and whether the account holders are male or female. This way, we can for instance see if men in one area have more money on average in their accounts than women in the same area or compare these averages across different areas.
 
@@ -289,6 +329,204 @@ ORDER BY
 LIMIT 15;
 ```
 
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/query3.png" alt="Alt text" width="600">
+
+#### Query 4
+This query calculates the average time it takes for loans to start being repaid in each district. For each district, it lists the district name and population, and then finds the average number of months between when a loan was given out and the date of the first repayment. The results are grouped by district and sorted so that the districts where it takes the least time to start repaying loans come first.
+```sql
+SELECT
+   D.DistrictName,
+   DS.Value AS Population,
+   AVG(TIMESTAMPDIFF(MONTH, L.Date, MinRepaymentDate)) AS AverageRepaymentDurationMonths
+FROM
+   Loan L
+JOIN Account A ON L.AccountID = A.AccountID
+JOIN User U ON A.UserID = U.UserID
+JOIN District D ON A.DistrictID = D.DistrictID
+JOIN DistrictStats DS ON D.DistrictID = DS.DistrictID AND DS.MetricID = 1
+JOIN (
+   SELECT
+       LR.LoanID,
+       MIN(T.Date) AS MinRepaymentDate
+   FROM
+       LoanRepayment LR
+   JOIN Transactions T ON LR.TransactionID = T.TransactionID
+   WHERE
+       T.IsDeleted = FALSE
+   GROUP BY
+       LR.LoanID
+) AS FirstRepayment ON L.LoanID = FirstRepayment.LoanID
+WHERE
+   L.IsDeleted = FALSE AND A.IsDeleted = FALSE AND U.IsDeleted = FALSE AND DS.IsDeleted = FALSE
+GROUP BY
+   D.DistrictName, DS.Value
+ORDER BY
+   AverageRepaymentDurationMonths ASC;
+```
+
+The negative results we get in the query are interesting as we expected the first payment date to be after the loan date. However, upon further inspection of the dataset, we found that the transaction dataset contains some discrepencies that result in this issue. We did not modify the data for now, and proceeded with the results that we get.
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/query4.png" alt="Alt text" width="600">
+
+**BONUS: We also implemented the following stored procedures which are a combination of several complex queries:**
+
+#### Stored Procedure 1: Generate Loan Repayment Schedule
+
+```sql
+CREATE DEFINER=`root`@`%` PROCEDURE `GenerateRepaymentSchedule`(IN accountNumber INT)
+BEGIN
+
+   DECLARE my_loanID INT;
+   DECLARE my_loanAmount DECIMAL(10,2);
+   DECLARE my_loanDate DATE;
+   DECLARE my_loanDuration INT;
+   DECLARE my_interestRate DECIMAL(5,2);
+   DECLARE my_paymentsDone DECIMAL(10,2);
+   DECLARE my_monthsRemaining INT;
+   DECLARE my_monthlyRepayment DECIMAL(10,2);
+   DECLARE my_lastTransactionDate DATE;
+   DECLARE my_currentDate DATE;
+   DECLARE done INT DEFAULT FALSE;
+
+   DECLARE loanCursor CURSOR FOR
+       SELECT LoanID FROM Loan WHERE AccountID = accountNumber;
+      
+   DECLARE CONTINUE HANDLER FOR NOT FOUND
+       SET done = TRUE;
+
+   DROP TEMPORARY TABLE IF EXISTS RepaymentSchedule;
+
+   CREATE TEMPORARY TABLE RepaymentSchedule (
+       LoanID INT,
+       LoanMonth DATE,
+       Payment DECIMAL(10,2)
+   );
+
+   OPEN loanCursor;
+  
+   loanLoop: LOOP
+       FETCH loanCursor INTO my_loanID;
+      
+       IF done THEN
+           LEAVE loanLoop;
+       END IF;
+
+       SELECT l.Amount, l.Date, l.DurationInMonths, lt.InterestRate
+       INTO my_loanAmount, my_loanDate, my_loanDuration, my_interestRate
+       FROM Loan l
+       JOIN LoanType lt ON l.LoanTypeID = lt.LoanTypeID
+       WHERE l.LoanID = my_loanID;
+
+       SELECT IFNULL(SUM(t.Amount), 0)
+       INTO my_paymentsDone
+       FROM LoanRepayment lr
+       JOIN Transactions t ON lr.TransactionID = t.TransactionID
+       WHERE lr.LoanID = my_loanID;
+
+       SELECT MAX(t.Date)
+       INTO my_lastTransactionDate
+       FROM LoanRepayment lr
+       JOIN Transactions t ON lr.TransactionID = t.TransactionID
+       WHERE lr.LoanID = my_loanID;
+
+       IF my_lastTransactionDate IS NOT NULL THEN
+           SELECT TIMESTAMPDIFF(MONTH, my_loanDate, my_lastTransactionDate)
+           INTO my_monthsRemaining;
+       ELSE
+           SET my_monthsRemaining = 0;
+       END IF;
+
+       SET my_monthsRemaining = my_loanDuration;
+       SET my_monthlyRepayment = (my_loanAmount + (my_loanAmount * (my_interestRate / 100) * (my_monthsRemaining / 12))) / my_monthsRemaining;
+
+       SET my_currentDate = COALESCE(my_lastTransactionDate, my_loanDate);
+
+
+       WHILE my_monthsRemaining > 0 DO
+           SET my_currentDate = ADDDATE(my_currentDate, INTERVAL 1 MONTH);
+
+
+           INSERT INTO RepaymentSchedule (LoanID, LoanMonth, Payment)
+           VALUES (my_loanID, my_currentDate, my_monthlyRepayment);
+
+
+           SET my_monthsRemaining = my_monthsRemaining - 1;
+       END WHILE;
+
+
+   END LOOP;
+
+   CLOSE loanCursor;
+
+   SELECT * FROM RepaymentSchedule;
+END
+```
+
+#### Stored Procedure 2: Get Transaction Summary
+```sql
+CREATE DEFINER=`root`@`%` PROCEDURE `GetTransactionSummary`(
+   IN account_number INT,
+   IN start_date DATE,
+   IN end_date DATE,
+   IN transaction_type VARCHAR(255)
+)
+BEGIN
+
+   -- Set default start date if none provided
+   IF start_date IS NULL THEN
+       SET start_date = '1970-01-01';
+   END IF;
+
+   -- Set default end date if none provided
+   IF end_date IS NULL THEN
+       SET end_date = NOW();
+   END IF;
+```
+
+#### Stored Procedure 3: Get User Accounts' Summary
+```sql
+CREATE DEFINER=`root`@`%` PROCEDURE `GetUserAccountsSummary`(
+   IN user_id INT,
+   IN start_date DATE,
+   IN end_date DATE
+)
+BEGIN
+
+   IF start_date IS NULL THEN
+       SET start_date = '1970-01-01';  -- Default start date if not provided
+   END IF;
+
+   IF end_date IS NULL THEN
+       SET end_date = NOW();  -- Default end date if not provided
+   END IF;
+
+   SELECT
+       u.UserID,
+       a.AccountID,
+       SUM(CASE
+           WHEN t.ReceiverAccountID = a.AccountID THEN t.Amount
+           ELSE 0
+       END) AS CreditSummary,
+       SUM(CASE
+           WHEN t.SenderAccountID = a.AccountID THEN t.Amount
+           ELSE 0
+       END) AS DebitSummary,
+       a.Balance AS AccountBalance
+   FROM
+       User u
+       INNER JOIN Account a ON u.UserID = a.UserID
+       LEFT JOIN Transactions t ON a.AccountID = t.ReceiverAccountID OR a.AccountID = t.SenderAccountID
+   WHERE
+       u.UserID = user_id AND
+       t.Date BETWEEN start_date AND end_date AND
+       t.IsDeleted = FALSE AND
+       a.IsDeleted = FALSE
+   GROUP BY
+       u.UserID, a.AccountID;
+
+END;
+```
+
 
 ## Part 2: Indexing
 
@@ -306,6 +544,22 @@ For this query, the `DateOfBirth` and `Gender` attributes in the `User` table we
 | Gender Index       | 18120.01 | 0.25 | 0.25
 | DOB + Gender Index | 18120.01 | 0.25 | 0.25
 
+No Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index1_1.png" alt="Alt text" width="600">
+
+DOB Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index1_2.png" alt="Alt text" width="600">
+
+Gender Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index1_3.png" alt="Alt text" width="600">
+
+DOB + Gender Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index1_4.png" alt="Alt text" width="600">
+
 The initial analysis reveals that indexing the date of birth does not change the query cost, implying that data retrieval efficiency remains consistent, as the database executes the same number of operations. However, indexing gender leads to a significant increase in the estimated query cost, an effect that persists even with both gender and date of birth indexed. This suggests that gender indexing profoundly affects the database's cost estimation, possibly due to a more complex query execution path introduced by the index on a low-cardinality field like gender.
 
 Indexing fields with low cardinality, such as gender, can result in unforeseen changes in query cost estimations. The significant cost increase observed upon indexing such fields underscores the necessity for careful planning and testing when implementing indexes. The impact of indexing varies greatly depending on the query and data structure involved. While indexes are essential for improving query execution times, their effect on cost estimations requires careful evaluation. This is to ensure that indexing provides the intended performance improvements without unduly complicating the execution plan or escalating resource requirements.
@@ -318,6 +572,14 @@ For this query, the `CreditScore` attribute in the `CreditScore` table was index
 | No Index           | 764.93 | 334.75 |
 | CreditScore Index  | 687.04 | 334.75 |
 
+No Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index2_1.png" alt="Alt text" width="600">
+
+CreditScore Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index2_2.png" alt="Alt text" width="600">
+
 Indexing on the CreditScore column led to a noticeable improvement in query performance, which was reflected in both the reduced overall cost and the more efficient execution time.
 
 The implementation of indexing on the CreditScore column underscores the value of indexing for optimizing database queries, especially those involving conditional logic based on averages or specific thresholds. While the cost reduction was modest, the improvement in execution time indicates a more efficient data retrieval process, emphasizing that indexing can significantly enhance performance by enabling faster access to relevant data. This case exemplifies the need for targeted indexing strategies that address specific performance bottlenecks in database operations.
@@ -327,11 +589,47 @@ For this query, the `Gender` attribute in the `User` table and the `DistrictName
 | Index Config | Cost |
 |--------------|:------:|
 | No Index           | 145.53 |
-| CreditScore Index  | 145.53| 
+| Gender Index  | 145.53| 
 | DistrictName Index | 145.53|
+
+No Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index3_1.png" alt="Alt text" width="600">
+
+Gender Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index3_2.png" alt="Alt text" width="600">
+
+DistrictName Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index3_3.png" alt="Alt text" width="600">
 
 The outputs before and after implementing indexes on DistrictName and Gender reveals a nuanced effect on query performance. Despite the introduction of indexes, the overall cost metrics and execution times show minimal fluctuation, indicating a balanced optimization by the database's query planner. The steady performance, particularly in operations like index lookups and filters, highlights the indexes' role in ensuring consistent data access speeds despite the added complexity of sorting and aggregating large datasets.
 
 The consistent query performance post-indexing on DistrictName and Gender underscores the strategic advantage of selective indexing in complex database queries. This scenario illustrates that proper indexing, even on columns with varied cardinality like DistrictName (high) and Gender (low), can effectively support the database in sustaining efficient query execution without significant cost penalties. 
+
+### Query 4
+For this query, the `DistrictName` attribute in the `District` table and the `Value` attribute in the `DistrictStats` table were indexed.
+| Index Config | Cost |
+|--------------|:------:|
+| No Index           | 401.02 |
+| DistrictName Index  | 401.02 | 
+| Value Index | 401.02 |
+
+No Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index4_1.png" alt="Alt text" width="600">
+
+DistrictName Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index4_2.png" alt="Alt text" width="600">
+
+Value Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index4_3.png" alt="Alt text" width="600">
+
+The estimated cost for processing the query remained unchanged at 401.02, regardless of whether indexes were added to DistrictName or the Value of DistrictStats. This consistency in cost estimates suggests that the indexing efforts didn't influence the database's internal predictions about how much work was needed to execute the query. Interestingly, even though indexes were applied, they didn't seem to sway the performance metrics according to the database's cost model. It's possible that the size of the data being queried was too small for the indexing to make a noticeable difference in performance from the database's perspective.
+
+The fact that all cost estimates stayed the same at 401.02, even after indexing, indicates that the addition of indexes did not significantly impact the performance. This could imply that the datasets involved in the queries are relatively small, and therefore, the potential performance gains from indexing were not substantial enough to be detected by the cost estimation model. In scenarios where the data size is not large, the database's existing mechanisms for handling queries might already be so efficient that indexes don't offer a noticeable improvement within the scope of this specific analysis.
 
 
