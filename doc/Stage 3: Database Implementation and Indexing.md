@@ -204,7 +204,7 @@ CREATE TABLE LoanRepayment (
     FOREIGN KEY (LoanID) REFERENCES Loan(LoanID)
 ```
 
-### Number of Rows
+### Row Count For Tables
 
 The following query was used to find the number of rows in each table:
 
