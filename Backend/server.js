@@ -13,9 +13,12 @@ const cors = require("cors");
 const apiRouter = require('./routers/api')
 const logger = require('./logger')
 const healthChecker = require('./healthChecker')
+const mysqlDB = require('./services/databaseService')
 
 const port = process.env.PORT
 const app = express()
+
+mysqlDB.initializeMySQL()
 
 if (process.env.accessLog === "true") {
   // setup access logger
