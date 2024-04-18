@@ -1,0 +1,12 @@
+.action-button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  /* You can add more styles for different button states like hover */
+  
