@@ -1,0 +1,51 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Use full screen height to center vertically */
+    background-color: #F0E68C; /* Adjust the color to match your design */
+  }
+  
+  .login-form .logo {
+    margin-bottom: 50px;
+    background-color: #D68A59; /* Adjust the color to match your design */
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .login-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-form input {
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 250px; /* Set a fixed width for inputs */
+  }
+  
+  .login-form button {
+    background-color: #D68A59; /* Adjust the color to match your design */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px; /* Set a fixed width for the button */
+  }
+  
+  .login-form div {
+    margin-top: 20px;
+  }
+  
+  .login-form span {
+    color: #555;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  

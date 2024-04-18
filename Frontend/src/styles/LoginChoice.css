@@ -1,0 +1,28 @@
+.login-choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Use full screen height to center vertically */
+    background-color: #F0E68C;
+    ; /* Adjust the color to match your design */
+  }
+  
+  .login-choice .logo {
+    margin-bottom: 100px; /* Increase spacing between logo and buttons */
+    background-color: #D68A59; /* Adjust the color to match your design */
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .login-choice .login-button {
+    background-color: #E1A95F; /* Adjust the color to match your design */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px; /* Set a fixed width for the buttons */
+  }
+  
