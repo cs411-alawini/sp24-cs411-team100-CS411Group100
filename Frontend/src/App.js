@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import LoginChoice from './components/LoginChoice.js';
 import LoginForm from './components/LoginForm.js';
 import Dashboard from './components/Dashboard.js';
+import Accounts from './components/Accounts';
 import './styles/App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<LoginChoice />} />
           <Route path="/login/:userType" element={<LoginForm />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/accounts" element={<Accounts />} />
           {/* Add other routes here */}
         </Routes>
       </div>

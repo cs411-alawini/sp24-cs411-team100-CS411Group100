@@ -5,8 +5,8 @@ import '../styles/ButtonPanel.css';
 function ButtonPanel() {
   return (
     <div className="button-panel">
-      <ActionButton label="Deposit" color="brown" />
       <ActionButton label="Transfer" color="brown" />
+      <ActionButton label="Show Transactions" color="brown" />
       <ActionButton label="Analyze" color="green" />
     </div>
   );
