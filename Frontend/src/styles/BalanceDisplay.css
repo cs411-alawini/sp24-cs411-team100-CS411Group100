@@ -10,16 +10,16 @@
   }
   
   .balance-amount {
-    font-size: 2.5em; /* Makes the balance size larger, adjust as needed */
+    font-size: 3em; /* Makes the balance size larger, adjust as needed */
     font-weight: bold; /* Makes the balance amount bold */
     letter-spacing: 1px; /* Optional: increases spacing between characters */
-    margin-top: 10px; /* Adds some space above the balance amount */
+    margin-top: 0px; /* Adds some space above the balance amount */
     padding: 10px 0; /* Padding top and bottom */
     display: inline-block; /* By default, make this an inline block for centering */
     background: rgba(255, 255, 255, 0.2); /* Slight white, translucent overlay */
     border-radius: 10px; /* Rounded corners for the amount background */
     width: auto; /* Auto-width to accommodate different amounts */
-    min-width: 200px; /* Minimum width to maintain a nice visual appearance */
+    min-width: 300px; /* Minimum width to maintain a nice visual appearance */
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle text shadow for better readability */
   }
   

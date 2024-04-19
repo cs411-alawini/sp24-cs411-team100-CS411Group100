@@ -28,13 +28,13 @@ function LoginForm() {
     fetch("http://localhost:8000/api/auth/token", requestOptions)
       .then(response => response.json())
       .then(result => {
-        if (result.token) {
-          console.log('Login successful:', result);
-          localStorage.setItem('token', result.token); // Save the token to local storage
-          navigate("/dashboard"); // Navigate to dashboard on successful login
-        } else {
-          setError('Incorrect username or password'); // Set error message on failure
-        }
+      if (result.token) {
+        console.log('Login successful:', result);
+        localStorage.setItem('token', result.token); // Save the token to local storage
+        navigate("/accounts"); // Navigate to accounts page on successful login
+      } else {
+        setError('Incorrect username or password'); // Set error message on failure
+      }
       })
       .catch(error => {
         console.error('Error:', error);
