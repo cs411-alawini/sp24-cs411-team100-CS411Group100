@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from './Header.js';
 import BalanceDisplay from './BalanceDisplay.js';
-import ButtonPanel from './ButtonPanel.js';
+import ButtonPanel from './ButtonPanel.js'; // Make sure to update this component as discussed
 import '../styles/Dashboard.css';
 
 function Dashboard() {
   const [account, setAccount] = useState(null);
   const [error, setError] = useState('');
+  const [showTransactions, setShowTransactions] = useState(false); // New state for toggling transactions
   const location = useLocation();
   const { accountId } = location.state || {};
 
@@ -41,11 +42,21 @@ function Dashboard() {
     }
   }, [accountId]);
 
+  // Toggle the visibility of the transactions dropdown
+  const toggleTransactions = () => {
+    setShowTransactions(!showTransactions);
+  };
+
   return (
     <div className="dashboard">
       <Header />
       {account && <BalanceDisplay balance={account.Balance} />} {/* Display balance only if account is not null */}
-      <ButtonPanel /> {/* Modify ButtonPanel as required */}
+      {/* Pass toggleTransactions and showTransactions as props */}
+      <ButtonPanel 
+        toggleTransactions={toggleTransactions} 
+        showTransactions={showTransactions}
+        accountId={accountId}
+      />
       {error && <div className="error">{error}</div>}
     </div>
   );
