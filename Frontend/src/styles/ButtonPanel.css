@@ -1,5 +1,6 @@
 .button-panel {
     display: flex;
     justify-content: center;
+    position: relative;
   }
   
