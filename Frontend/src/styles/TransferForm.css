@@ -1,0 +1,49 @@
+.transfer-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.notification {
+    padding: 10px;
+    margin: 10px auto; /* Center the notification horizontally */
+    background-color: rgba(76, 175, 80, 0.7); /* Green color for successful notification */
+    color: white;
+    width: fit-content; /* Set width to fit the content */
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+.notification.failure {
+    background-color: rgba(244, 67, 54, 0.7);
+}
+
+.transfer-form input,
+.transfer-form select,
+.transfer-form button {
+    padding: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    max-width: 400px;
+}
+
+.transfer-form button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+    max-width: 400px;
+}
+
+@media (max-width: 600px) {
+    .transfer-form input,
+    .transfer-form select,
+    .transfer-form button {
+        width: 100%;
+    }
+}

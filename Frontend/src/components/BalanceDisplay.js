@@ -1,9 +1,7 @@
 import React from 'react';
 import '../styles/BalanceDisplay.css';
 
-// Add a prop for the balance
 function BalanceDisplay({ balance }) {
-  // Format the balance as a USD currency string
   const formattedBalance = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
