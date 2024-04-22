@@ -1,6 +1,14 @@
-.button-panel {
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
-  
+/* ButtonPanel.css */
+
+.button-row {
+  /* Adjust this style to suit your layout preference */
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px; /* Add padding to separate buttons from the form */
+}
+
+.form-and-transactions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

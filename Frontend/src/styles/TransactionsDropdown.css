@@ -30,7 +30,6 @@
   }
   
   .transactions-dropdown {
-    position: absolute;
     top: 100%; /* Position it right below the button panel */
     left: 0;
     right: 0;
