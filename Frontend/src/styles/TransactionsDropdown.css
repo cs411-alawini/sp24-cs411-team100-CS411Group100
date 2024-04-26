@@ -1,44 +1,53 @@
 .transactions-dropdown {
-    display: flex;
-    flex-direction: column;
-    max-height: 500px; /* Adjust based on your needs */
-    overflow-y: auto; /* Adds a scrollbar if content overflows */
-  }
-  
-  .transaction-item {
-    border: 1px solid #ccc; /* A light grey border */
-    border-radius: 8px; /* Rounded corners */
-    padding: 15px; /* Space inside the boxes */
-    margin-bottom: 10px; /* Space between boxes */
-    background-color: #f9f9f9; /* A light grey background */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
-  }
-  
-  .transaction-detail-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-  }
-  
-  .transaction-detail-label {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .transaction-detail-value {
-    color: #666;
-  }
-  
-  .transactions-dropdown {
-    top: 100%; /* Position it right below the button panel */
-    left: 0;
-    right: 0;
-    z-index: 100; /* Ensures it will be on top of other content */
-    background: white; /* Change this to match your app's theme */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-height: 400px; /* Adjust based on your needs */
-    overflow-y: auto; /* Adds a scrollbar if the content is too tall */
-    /* Other styles you wish to apply to the dropdown */
-  }
+  display: flex;
+  flex-direction: column;
+  position: absolute; /* Positions dropdown relative to its positioned parent */
+  top: 50%; /* Below the button */
+  left: 0;
+  right: 0;
+  z-index: 100; /* Above other content */
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.transaction-item,
+.transaction-item-header {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* Creates 6 columns of equal width */
+  gap: 10px; /* Space between grid items */
+}
+
+.transaction-item {
+  border-bottom: 1px solid #ccc; /* Separates rows */
+  padding: 15px; /* Space inside each grid item */
+}
+
+.transaction-item-header {
+  background-color: #ddd; /* Light grey for header background */
+  text-align: center;
+  font-weight: bold;
+  padding: 15px; /* Ensure this matches .transaction-item padding for alignment */
+}
+
+.transaction-detail-label,
+.transaction-detail-value {
+  text-align: left; /* Aligns text to the left */
+  padding: 5px 0; /* Pads top and bottom of each cell */
+}
+
+/* Ensure labels and values have the same horizontal padding */
+.transaction-detail-label,
+.transaction-detail-value {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Optional: Style to make the category stand out if it's important */
+.transaction-category {
+  font-weight: bold;
+  color: #444; /* Darker text for category */
+}
