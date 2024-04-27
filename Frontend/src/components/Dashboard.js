@@ -4,12 +4,14 @@ import Header from './Header.js';
 import BalanceDisplay from './BalanceDisplay.js';
 import ButtonPanel from './ButtonPanel.js';
 import '../styles/Dashboard.css';
+import LoansPage from './LoansPage';
 
 function Dashboard() {
   const [account, setAccount] = useState(null);
   const [error, setError] = useState('');
   const [showTransactions, setShowTransactions] = useState(false);
   const location = useLocation();
+  const [showLoans, setShowLoans] = useState(false);
   const { state } = location; // Get the state object from location
   const accountId = state ? state.accountId : null; // Extract accountId from state
 
@@ -41,6 +43,21 @@ function Dashboard() {
 
   const toggleTransactions = () => setShowTransactions(!showTransactions);
 
+  const toggleLoans = () => setShowLoans(!showLoans);
+
+  // Handlers for the LoansPage actions
+  const handleGetNewLoan = () => {
+    console.log('Navigate to get new loan form or handle inline');
+  };
+
+  const handleViewLoans = () => {
+    console.log('Show existing loans or navigate to loans overview');
+  };
+
+  const handleBack = () => {
+    setShowLoans(false); // Simply set showLoans to false to return to dashboard
+  };
+
 
   const refreshBalance = () => {
     const token = localStorage.getItem('token');
@@ -68,17 +85,28 @@ function Dashboard() {
     });
   };
   
-
   return (
     <div className="dashboard">
       <Header />
-      {account && <BalanceDisplay balance={account.Balance} />}
-      <ButtonPanel 
-        toggleTransactions={toggleTransactions} 
-        showTransactions={showTransactions}
-        accountId={accountId}
-        refreshBalance={refreshBalance}
-      />
+      {!showLoans && (
+        <>
+          {account && <BalanceDisplay balance={account.Balance} />}
+          <ButtonPanel 
+            toggleTransactions={toggleTransactions} 
+            showTransactions={showTransactions}
+            toggleLoans={toggleLoans} // Pass toggleLoans function
+            accountId={accountId}
+            refreshBalance={refreshBalance}
+          />
+        </>
+      )}
+      {showLoans && (
+        <LoansPage 
+          onGetNewLoan={handleGetNewLoan}
+          onViewLoans={handleViewLoans}
+          onBack={handleBack} // Pass the handler for going back to the dashboard
+        />
+      )}
       {error && <div className="error">{error}</div>}
     </div>
   );

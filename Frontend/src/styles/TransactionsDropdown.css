@@ -1,12 +1,13 @@
 .transactions-dropdown {
   display: flex;
   flex-direction: column;
-  position: absolute; /* Positions dropdown relative to its positioned parent */
+  position: relative; /* Positions dropdown relative to its positioned parent */
+  margin-top: 20px;
   top: 50%; /* Below the button */
   left: 0;
   right: 0;
   z-index: 100; /* Above other content */
-  background: white;
+  background: #D68A59;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -27,16 +28,19 @@
 }
 
 .transaction-item-header {
-  background-color: #ddd; /* Light grey for header background */
+  background-color: #c66829fd; /* Light grey for header background */
   text-align: center;
   font-weight: bold;
   padding: 15px; /* Ensure this matches .transaction-item padding for alignment */
+  /* change font color to white */
+  color: white;
 }
 
 .transaction-detail-label,
 .transaction-detail-value {
   text-align: left; /* Aligns text to the left */
   padding: 5px 0; /* Pads top and bottom of each cell */
+  color: white;
 }
 
 /* Ensure labels and values have the same horizontal padding */
@@ -49,5 +53,5 @@
 /* Optional: Style to make the category stand out if it's important */
 .transaction-category {
   font-weight: bold;
-  color: #444; /* Darker text for category */
+  color: #ffffff; /* Darker text for category */
 }

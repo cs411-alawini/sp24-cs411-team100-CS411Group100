@@ -4,6 +4,7 @@ import LoginChoice from './components/LoginChoice.js';
 import LoginForm from './components/LoginForm.js';
 import Dashboard from './components/Dashboard.js';
 import Accounts from './components/Accounts';
+import LoansPage from './components/LoansPage';
 import './styles/App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login/:userType" element={<LoginForm />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/accounts" element={<Accounts />} />
+          <Route path="/loans" element={<LoansPage />} /> 
           {/* Add other routes here */}
         </Routes>
       </div>

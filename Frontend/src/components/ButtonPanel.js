@@ -1,26 +1,47 @@
 // ButtonPanel.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ActionButton from './ActionButton';
 import TransactionsDropdown from './TransactionsDropdown';
 import TransferForm from './TransferForm';
 import '../styles/ButtonPanel.css';
 
-function ButtonPanel({ toggleTransactions, showTransactions, accountId, refreshBalance}) {
+function ButtonPanel({ toggleTransactions, showTransactions, toggleLoans, accountId, refreshBalance, fontSize }) {
   const [showTransferForm, setShowTransferForm] = useState(false);
+  const navigate = useNavigate();
+
+  // Font size class determination
+  const fontSizeClass = fontSize === 'large' ? 'large-font' : '';
 
   return (
     <div className="button-panel">
       <div className="button-row">
-        <ActionButton label="Transfer" color="brown" onClick={() => setShowTransferForm(!showTransferForm)} />
-        <ActionButton label="Show Transactions" color="brown" onClick={toggleTransactions} />
-        <ActionButton label="Analyze" color="green" />
-      </div>
-      {showTransferForm && (
-        <TransferForm
-          accountId={accountId}
-          refreshBalance={refreshBalance}
+        <ActionButton 
+          label="Transfer" 
+          className={`action-button transfer-button ${fontSizeClass}`}
+          onClick={() => setShowTransferForm(!showTransferForm)}
         />
-      )}
+        <ActionButton 
+          label="Show Transactions" 
+          className={`action-button transactions-button ${fontSizeClass}`}
+          onClick={toggleTransactions}
+        />
+        <ActionButton 
+          label="Loans" 
+          className={`action-button loans-button ${fontSizeClass}`}
+          onClick={toggleLoans}
+        />
+        <ActionButton 
+          label="Analyze" 
+          className={`action-button analyze-button ${fontSizeClass}`}
+        />
+        <ActionButton 
+          label="Back to Accounts" 
+          className={`action-button back-to-accounts-button ${fontSizeClass}`}
+          onClick={() => navigate('/accounts')}
+        />
+      </div>
+      {showTransferForm && <TransferForm accountId={accountId} refreshBalance={refreshBalance} />}
       {showTransactions && <TransactionsDropdown accountId={accountId} />}
     </div>
   );

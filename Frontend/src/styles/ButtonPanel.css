@@ -1,14 +1,38 @@
 /* ButtonPanel.css */
 
 .button-row {
-  /* Adjust this style to suit your layout preference */
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   padding-bottom: 20px; /* Add padding to separate buttons from the form */
+  /* center the buttons on the page */
+  align-items: center;
+  margin: 0 auto;
+  width: 40%;
 }
 
-.form-and-transactions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.action-button {
+  background-color: #4CAF50; /* Default green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px; /* Default font size */
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
 }
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Specific button styles */
+.transfer-button { background-color: #D68A59; } /* Golden rod */
+.transactions-button { background-color: #D68A59; } /* Saddle Brown */
+.loans-button { background-color: #D68A59; } /* Brown */
+.analyze-button { background-color: #4CAF50; } /* Slate blue */
+.back-to-accounts-button { background-color: #e01c1c; } /* Sienna */
+
+.large-font { font-size: 18px; } /* Class for larger font size */
