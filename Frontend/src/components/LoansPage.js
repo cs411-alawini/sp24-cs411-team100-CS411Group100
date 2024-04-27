@@ -1,6 +1,6 @@
 // LoansPage.js
 import React from 'react';
-import '../styles/LoansPage.css'; // Ensure the path is correct
+import '../styles/LoansPage.css';
 
 function LoansPage({ onGetNewLoan, onViewLoans, onBack }) {
   return (
