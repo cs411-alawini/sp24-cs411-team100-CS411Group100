@@ -1,16 +1,12 @@
+// ActionButton.js
 import React from 'react';
-import '../styles/ActionButton.css';
 
-function ActionButton({ label, color, onClick }) {
-  const buttonStyle = {
-    backgroundColor: color,
-  };
-
+const ActionButton = ({ label, onClick, className }) => {
   return (
-    <button className="action-button" style={buttonStyle} onClick={onClick}>
+    <button className={className} onClick={onClick}>
       {label}
     </button>
   );
-}
+};
 
 export default ActionButton;

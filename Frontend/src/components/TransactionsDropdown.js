@@ -19,7 +19,12 @@ function TransactionsDropdown({ accountId }) {
     })
       .then(response => response.json())
       .then(data => {
-        setTransactions(data.transactionSummary);
+        if (data.transactionSummary) {
+          setTransactions(data.transactionSummary);
+        } else {
+          console.error('Transaction summary not found:', data);
+          setError('Transaction data is missing in the response');
+        }
         setIsLoading(false);
       })
       .catch(err => {

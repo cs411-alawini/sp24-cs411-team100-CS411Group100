@@ -1,0 +1,55 @@
+/* LoansPage.css */
+
+.loans-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40vh; /* Full viewport height */
+    padding: 20px; /* Padding around the container */
+  }
+  
+  .loans-title {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px; /* Space between the title and the buttons */
+  }
+  
+  .loans-button-row {
+    display: flex;
+    justify-content: space-around;
+    width: 35%; /* Take up full container width */
+  }
+  
+  .loan-option {
+    background-color: #D68A59; /* Default green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .loan-option:hover {
+    transform: translateY(-3px); /* Slight lift */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+  }
+  
+  .loan-option.back-to-dashboard {
+    background-color: #ae1e13; /* Brown color for the dashboard return button */
+  }
+  
+  @media (max-width: 600px) {
+    .loans-button-row {
+      flex-direction: column; /* Stack vertically on small screens */
+    }
+  
+    .loan-option {
+      width: 80%; /* Responsive width for smaller screens */
+    }
+  }  
