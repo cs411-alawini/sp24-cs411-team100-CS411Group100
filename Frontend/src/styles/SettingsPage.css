@@ -1,0 +1,55 @@
+/* SettingsPage.css */
+
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    padding: 20px;
+  }
+  
+  .settings-title {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  .settings-button-row {
+    display: flex;
+    justify-content: space-around;
+    width: 55%;
+  }
+  
+  .setting-option {
+    background-color: #D68A59; /* Choose a different color for differentiation */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .setting-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  }
+  
+  .setting-option.back-to-dashboard {
+    background-color: #ae1e13; /* Different shade for back button */
+  }
+  
+  @media (max-width: 600px) {
+    .settings-button-row {
+      flex-direction: column;
+    }
+  
+    .setting-option {
+      width: 80%;
+    }
+  }  
