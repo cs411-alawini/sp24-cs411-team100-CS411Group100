@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm.js';
 import Dashboard from './components/Dashboard.js';
 import Accounts from './components/Accounts';
 import LoansPage from './components/LoansPage';
+import SettingsPage from './components/SettingsPage';
 import './styles/App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/loans" element={<LoansPage />} /> 
+          <Route path="/settings" element={<SettingsPage />} />
           {/* Add other routes here */}
         </Routes>
       </div>
