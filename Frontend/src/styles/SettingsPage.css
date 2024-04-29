@@ -1,55 +1,93 @@
 /* SettingsPage.css */
 
 .settings-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 40vh;
-    padding: 20px;
-  }
-  
-  .settings-title {
-    color: #333;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 30px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Changed from center to flex-start */
+  min-height: 40vh; /* Changed from height to min-height */
+  padding: 20px;
+}
+
+.settings-title {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.settings-button-row {
+  display: flex;
+  justify-content: space-around;
+  width: 55%;
+  margin-bottom: 20px; /* Add margin to maintain spacing */
+}
+
+.setting-option {
+  background-color: #D68A59; /* Choose a different color for differentiation */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.setting-option:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.setting-option.back-to-dashboard {
+  background-color: #ae1e13; /* Different shade for back button */
+}
+
+@media (max-width: 600px) {
   .settings-button-row {
-    display: flex;
-    justify-content: space-around;
-    width: 55%;
-  }
-  
-  .setting-option {
-    background-color: #D68A59; /* Choose a different color for differentiation */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 15px 30px;
-    margin: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    text-align: center;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .setting-option:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  }
-  
-  .setting-option.back-to-dashboard {
-    background-color: #ae1e13; /* Different shade for back button */
-  }
-  
-  @media (max-width: 600px) {
-    .settings-button-row {
       flex-direction: column;
-    }
-  
-    .setting-option {
+  }
+
+  .setting-option {
       width: 80%;
-    }
-  }  
+  }
+}  
+
+.label {
+  margin-right: 10px;
+}
+
+.input-container {
+  margin-top: 20px;
+}
+
+.district-input {
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.submit-button {
+  padding: 8px 16px;
+  background-color: rgba(76, 175, 80, 0.7); /* Green color for successful notification */
+  color: white;
+  width: fit-content; /* Set width to fit the content */
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.success-message {
+  color: white;
+  background-color: green;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}

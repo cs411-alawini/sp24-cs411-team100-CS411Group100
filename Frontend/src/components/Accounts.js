@@ -36,7 +36,7 @@ function Accounts() {
 
   // Handler for clicking an account
   const handleAccountClick = (accountId) => {
-    // Navigate to Dashboard and pass accountId in state (if needed)
+    localStorage.setItem('accountId', accountId);
     navigate('/dashboard', { state: { accountId } });
   };
 
