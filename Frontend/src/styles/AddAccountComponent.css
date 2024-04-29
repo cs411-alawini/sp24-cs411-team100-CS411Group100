@@ -1,0 +1,59 @@
+/* Styling for the input container and form elements */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Input fields, selects, and buttons */
+.input-container input,
+.input-container select,
+.input-container button {
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    max-width: 50px; /* Ensures form elements do not stretch too wide */
+}
+
+.district-input {
+    margin-left: 10px; /* Adds space between the label and the input */
+}
+
+/* Button styling for form submission */
+.input-container button {
+    background-color: #4CAF50; /* Green button for actions */
+    color: white;
+    cursor: pointer;
+    border: none;
+    max-width: 300px;
+}
+
+/* Notification styling for success and error messages */
+.notification {
+    padding: 10px;
+    margin: 10px auto;
+    background-color: rgba(76, 175, 80, 0.7); /* Default green for success */
+    color: white;
+    width: fit-content;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notification.failure {
+    background-color: rgba(244, 67, 54, 0.7); /* Red for failure */
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 600px) {
+    .input-container input,
+    .input-container select,
+    .input-container button {
+        width: 100%;
+    }
+}

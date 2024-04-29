@@ -1,0 +1,64 @@
+/* DeleteAccountComponent.css */
+
+.delete-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.delete-button {
+    background-color: #D68A59;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.delete-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.confirmation-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.confirmation-text {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+.confirm-button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.confirm-button.yes {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.confirm-button.no {
+    background-color: #ae1e13;
+    color: white;
+}
+
+.confirm-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
