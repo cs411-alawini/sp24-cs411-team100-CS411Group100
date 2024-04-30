@@ -1,12 +1,12 @@
 .transactions-dropdown {
   display: flex;
   flex-direction: column;
-  position: relative; /* Positions dropdown relative to its positioned parent */
+  position: relative;
   margin-top: 20px;
-  top: 50%; /* Below the button */
+  top: 50%;
   left: 0;
   right: 0;
-  z-index: 100; /* Above other content */
+  z-index: 100;
   background: #D68A59;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -18,40 +18,79 @@
 .transaction-item,
 .transaction-item-header {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* Creates 6 columns of equal width */
-  gap: 10px; /* Space between grid items */
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
 }
 
 .transaction-item {
-  border-bottom: 1px solid #ccc; /* Separates rows */
-  padding: 15px; /* Space inside each grid item */
+  border-bottom: 1px solid #ccc;
+  padding: 15px;
+  transition: background-color 0.3s; /* Smooth background transition for hover effect */
+}
+
+.transaction-item:hover {
+  background-color: #b9724f; /* Slightly darker on hover */
+  cursor: pointer;
 }
 
 .transaction-item-header {
-  background-color: #c66829fd; /* Light grey for header background */
+  background-color: #c66829fd;
   text-align: center;
   font-weight: bold;
-  padding: 15px; /* Ensure this matches .transaction-item padding for alignment */
-  /* change font color to white */
+  padding: 15px;
   color: white;
 }
 
 .transaction-detail-label,
 .transaction-detail-value {
-  text-align: left; /* Aligns text to the left */
-  padding: 5px 0; /* Pads top and bottom of each cell */
-  color: white;
-}
-
-/* Ensure labels and values have the same horizontal padding */
-.transaction-detail-label,
-.transaction-detail-value {
+  text-align: left;
+  padding: 5px 0;
   padding-left: 5px;
   padding-right: 5px;
+  color: white;
 }
 
-/* Optional: Style to make the category stand out if it's important */
 .transaction-category {
   font-weight: bold;
-  color: #ffffff; /* Darker text for category */
+  color: #ffffff;
+}
+
+/* Scrollbar styles */
+.transactions-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.transactions-dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.transactions-dropdown::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.transactions-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Error message styling */
+.error {
+  color: #ff4242;
+  background: #ffecec;
+  border-left: 5px solid #ff0000;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 600px) {
+  .transaction-item,
+  .transaction-item-header {
+    grid-template-columns: repeat(3, 1fr); /* Adjusts to 3 columns on smaller screens */
+    padding: 10px; /* Smaller padding for items */
+  }
+  .transaction-detail-label,
+  .transaction-detail-value {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
 }
