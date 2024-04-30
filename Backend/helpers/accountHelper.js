@@ -73,3 +73,17 @@ exports.isLoanLinkedToUserID = async (userID, accountID, loanID) => {
         throw error; // or return false, or any other error handling mechanism
     }
 }
+
+exports.isValidEmployee = async (userID) => {
+    try {
+        const query = `SELECT * FROM Employee WHERE UserID = ? AND IsDeleted = FALSE`;
+        const results = await mysqlDB.executeMySQLQuery(query, [userID]);
+
+        return results.length > 0;
+
+    } catch (error) {
+        console.error('Error checking if UserID is linked to an employee:', error);
+        // Handle error appropriately
+        throw error; // or return false, or any other error handling mechanism
+    }
+}
