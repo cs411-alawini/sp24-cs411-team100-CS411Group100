@@ -5,7 +5,8 @@ import LoginForm from './components/LoginForm.js';
 import Dashboard from './components/Dashboard.js';
 import Accounts from './components/Accounts';
 import LoansPage from './components/LoansPage';
-import SettingsPage from './components/SettingsPage';
+import SettingsPageAccount from './components/SettingsPageAccount';
+import SettingsPageUser from './components/SettingsPageUser';
 import './styles/App.css';
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/loans" element={<LoansPage />} /> 
-          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/settingsaccount" element={<SettingsPageAccount />} />
+          <Route path="/settingsuser" element={<SettingsPageUser />} />
           {/* Add other routes here */}
         </Routes>
       </div>

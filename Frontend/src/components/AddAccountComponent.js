@@ -1,37 +1,53 @@
-import React, { useState } from 'react';
-import '../styles/AddAccountComponent.css'; // Ensure CSS path is correct
+import React, { useState, useEffect } from 'react';
+import '../styles/AddAccountComponent.css'; // Ensure the path is correct
 
 function AddAccountComponent() {
-    const [districtId, setDistrictId] = useState('');
+    const [districts, setDistricts] = useState([]);
+    const [selectedDistrictId, setSelectedDistrictId] = useState('');
     const [message, setMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(true);
 
-    const handleInputChange = (e) => {
-        setDistrictId(e.target.value);
+    useEffect(() => {
+        const myHeaders = new Headers();
+        myHeaders.append("Cookie", "connect.sid=s%3A3-_8ka7x-_gWr-_QuSk8fpOF5t70F2gg.Wn4BFiUiJe2ds371%2BrRPQmdbQqGoL5uEkBzY0CZG4a8");
+
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+
+        fetch("http://localhost:8000/api/get/districts", requestOptions)
+            .then(response => response.json())
+            .then(result => setDistricts(result.districts))
+            .catch(error => console.error("Failed to fetch districts", error));
+    }, []);
+
+    const handleDistrictChange = (e) => {
+        setSelectedDistrictId(e.target.value);
     };
 
     const handleSubmit = () => {
-        if (!districtId) {
-            setMessage("Error: District ID is required");
+        if (!selectedDistrictId) {
+            setMessage("Error: District selection is required");
             setIsSuccess(false);
             return;
         }
 
-        const token = localStorage.getItem("token"); // Retrieve token from local storage
+        const token = localStorage.getItem("token");
         if (!token) {
             setMessage("Error: Authentication token not found");
             setIsSuccess(false);
             return;
         }
 
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-        myHeaders.append("Authorization", `Bearer ${token}`);
-        // Optional: Remove cookie if not needed or manage cookies differently
-        // myHeaders.append("Cookie", "<your_cookie_here>");
+        const myHeaders = new Headers({
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": `Bearer ${token}`,
+        });
 
         const urlencoded = new URLSearchParams();
-        urlencoded.append("DistrictID", districtId);
+        urlencoded.append("DistrictID", selectedDistrictId);
 
         const requestOptions = {
             method: "POST",
@@ -64,15 +80,21 @@ function AddAccountComponent() {
 
     return (
         <div className="input-container">
-            <div className="input-row"> {/* Added this container for inline display */}
-                <label htmlFor="districtId">Enter District ID for new account:</label>
-                <input
-                    type="text"
-                    id="districtId"
+            <div className="input-row">
+                <label htmlFor="districtSelect">Select District for new account:</label>
+                <select
+                    id="districtSelect"
                     className="district-input"
-                    value={districtId}
-                    onChange={handleInputChange}
-                />
+                    value={selectedDistrictId}
+                    onChange={handleDistrictChange}
+                >
+                    <option value="">Please select a district</option>
+                    {districts.map(district => (
+                        <option key={district.DistrictID} value={district.DistrictID}>
+                            {district.DistrictName}
+                        </option>
+                    ))}
+                </select>
             </div>
             <button onClick={handleSubmit} className="submit-button">Create Account</button>
             {message && (
