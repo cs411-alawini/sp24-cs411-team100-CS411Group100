@@ -5,6 +5,7 @@ const userRouter= require("./user")
 const accountRouter= require("./account")
 const transactionRouter= require("./transaction")
 const getRouter= require("./get")
+const loanRouter= require("./loan")
 
 var router = express.Router();
 
@@ -15,5 +16,6 @@ router.use('/user', userRouter)
 router.use('/account', accountRouter)
 router.use('/transaction', transactionRouter)
 router.use('/get', getRouter)
+router.use('/loan', loanRouter)
 
 module.exports = router;
