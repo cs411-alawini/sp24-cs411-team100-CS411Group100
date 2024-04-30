@@ -19,23 +19,14 @@ function DeleteAccountComponent({ setShowDeleteAccount }) {
         };
 
         fetch(`http://localhost:8000/api/account/${accountId}`, requestOptions)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
+            .then(response => response.text())
             .then(result => {
                 console.log(result);
-                if (typeof setShowDeleteAccount === 'function') {
-                    setShowDeleteAccount(false);
-                }
+                setShowDeleteAccount(false);
+                localStorage.removeItem('accountId');
                 navigate('/accounts');
             })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to delete the account.');
-            });
+            .catch(error => console.error('Error:', error));
     };
 
     return (

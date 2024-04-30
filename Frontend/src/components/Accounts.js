@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import Header from './HeaderUser.js';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Accounts.css';
 
 function Accounts() {
   const [accounts, setAccounts] = useState([]);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Instantiate the navigate function
 
   useEffect(() => {
     const myHeaders = new Headers();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token'); // Retrieve the token from local storage
     myHeaders.append("Authorization", `Bearer ${token}`);
 
     const requestOptions = {
@@ -27,7 +26,7 @@ function Accounts() {
         return response.json();
       })
       .then(result => {
-        setAccounts(result.accounts);
+        setAccounts(result.accounts); // Set it to the accounts state
       })
       .catch(error => {
         console.error('Error:', error);
@@ -35,6 +34,7 @@ function Accounts() {
       });
   }, []);
 
+  // Handler for clicking an account
   const handleAccountClick = (accountId) => {
     localStorage.setItem('accountId', accountId);
     navigate('/dashboard', { state: { accountId } });
@@ -42,24 +42,22 @@ function Accounts() {
 
   return (
     <div className="accounts-page">
-      <Header />
-      <div className="center-container"> {/* Add this wrapper for centering */}
-        <h1>Welcome. Choose your account.</h1>
-        {accounts.length > 0 ? (
-          accounts.map((account) => (
-            <div
-              key={account.AccountID}
-              className="account-option"
-              onClick={() => handleAccountClick(account.AccountID)}
-            >
-              {account.AccountID}
-            </div>
-          ))
-        ) : (
-          <p>No accounts available.</p>
-        )}
-        {error && <div className="error">{error}</div>}
-      </div>
+      <h1>Welcome. Choose your account.</h1>
+      {accounts.length > 0 ? (
+        accounts.map((account) => (
+          <div
+            key={account.AccountID}
+            className="account-option"
+            onClick={() => handleAccountClick(account.AccountID)} // Add the onClick event here
+          >
+            {account.AccountID}
+            {/* Display other account details if needed */}
+          </div>
+        ))
+      ) : (
+        <p>No accounts available.</p>
+      )}
+      {error && <div className="error">{error}</div>}
     </div>
   );
 }
