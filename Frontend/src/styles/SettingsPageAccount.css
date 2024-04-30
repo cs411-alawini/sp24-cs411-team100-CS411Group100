@@ -1,4 +1,4 @@
-/* SettingsPage.css */
+/* SettingsPageAccount.css */
 
 .settings-container {
   display: flex;
@@ -16,10 +16,10 @@
   margin-bottom: 30px;
 }
 
-.settings-button-row {
+.settings-button-row-acc {
   display: flex;
   justify-content: space-around;
-  width: 55%;
+  width: 30%;
   margin-bottom: 20px; /* Add margin to maintain spacing */
 }
 

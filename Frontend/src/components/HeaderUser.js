@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
 
-function Header() {
+function HeaderUser() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -11,7 +11,7 @@ function Header() {
   };
 
   const goToSettings = () => {
-    navigate('/settings');
+    navigate('/settingsuser');
   };
 
   return (
@@ -25,4 +25,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderUser;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from './Header.js';
+import Header from './HeaderAccount.js';
 import BalanceDisplay from './BalanceDisplay.js';
 import ButtonPanel from './ButtonPanel.js';
 import '../styles/Dashboard.css';
