@@ -1,53 +1,63 @@
 .accounts-page {
-  background-color: #F0E68C; /* Adjust the color to match your design */
-  min-height: 100vh; /* Ensure the page takes up full viewport height */
-}
-
-.center-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 60px); /* Assuming the header is 60px, adjust if needed */
-}
-
-.accounts-page h1 {
-  color: #333;
-  margin-bottom: 30px;
-}
-
-.account-option {
-  background-color: #D68A59;
-  padding: 20px;
-  margin: 10px 0;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 250px; /* Set a fixed width for account options */
-  text-align: center;
-  color: white;
-  font-size: 2em;
-  font-weight: bold;
-}
-
-.account-option:hover,
-.account-option:focus { /* Added focus for keyboard accessibility */
-  background-color: #c77a50;
-  outline: none; /* Removes the outline if you are providing visual feedback */
-}
-
-.error {
-  color: #D9534F;
-  margin-top: 20px;
-  background-color: #f8d7da;
-  padding: 10px;
-  border-radius: 5px;
-  width: 300px;
-  text-align: center;
-}
-
-@media (max-width: 600px) {
-  .account-option,
-  .error {
-      width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh; /* Use full screen height to center vertically */
+    background-color: #F0E68C; /* Adjust the color to match your design */
   }
-}
+  
+  .accounts-page h1 {
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .account-option {
+    background-color: #D68A59; /* Adjust the color to match your design */
+    padding: 20px;
+    margin:  10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 250px; /* Set a fixed width for account options */
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+  }
+  
+  .account-option:hover {
+    background-color: #c77a50; /* A slightly darker color for hover effect */
+  }
+  
+  .error {
+    color: #D9534F; /* A color for error messages */
+    margin-top: 20px;
+  }
+  
+  /* Optionally, if you want to add animations when hovering over the account options */
+  .account-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  /* You may want to style the error message to be more noticeable */
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  /* Responsive adjustments, if necessary */
+  @media (max-width: 600px) {
+    .account-option,
+    .error {
+      width: 80%; /* Make width responsive */
+    }
+  }
+  
+  
