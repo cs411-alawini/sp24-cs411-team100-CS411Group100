@@ -44,3 +44,32 @@ exports.isValidTransactionType = async (typeID) => {
     const results = await mysqlDB.executeMySQLQuery(query, [typeID]);
     return results && results.length > 0;
 }
+
+exports.isLoanLinkedToUserID = async (userID, accountID, loanID) => {
+    try {
+        const query = `SELECT AccountID FROM Loan WHERE LoanID = ? AND AccountID = ? AND IsDeleted = FALSE`;
+        const results = await mysqlDB.executeMySQLQuery(query, [loanID, accountID]);
+
+        if (results.length === 0) {
+            // Loan ID not found or deleted
+            return false;
+        }
+
+        // Check if the account associated with the loan belongs to the provided user ID
+        const accountQuery = `SELECT UserID FROM Account WHERE AccountID = ? AND IsDeleted = FALSE`;
+        const accountResults = await mysqlDB.executeMySQLQuery(accountQuery, [accountID]);
+
+        if (accountResults.length === 0) {
+            // Account associated with the loan not found or deleted
+            return false;
+        }
+
+        // Check if the user ID matches
+        return accountResults[0].UserID === userID;
+
+    } catch (error) {
+        console.error('Error checking loan linked to user ID:', error);
+        // Handle error appropriately
+        throw error; // or return false, or any other error handling mechanism
+    }
+}
