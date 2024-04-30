@@ -1,0 +1,55 @@
+/* UserDetailsComponent.css */
+
+.user-details-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 300px;
+}
+
+.user-detail-field {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.user-detail-input, .save-button {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.save-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+    padding: 10px 20px; /* Padding for aesthetics */
+    width: 50%; /* Default width, can be adjusted as needed */
+    align-self: center; /* Center align the button within its container */
+}
+
+.save-button:hover {
+    background-color: #367B35;
+}
+
+.message {
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.green {
+    background-color: rgba(76, 175, 80, 0.7);
+}
+
+.red {
+    background-color: rgba(244, 67, 54, 0.7);
+}
