@@ -1,0 +1,31 @@
+/* LoansDisplay.css */
+.loans-display {
+    display: flex;
+    overflow-x: auto;  /* Allows horizontal scrolling for multiple loan items */
+    align-items: center;
+    justify-content: start;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .loan-item {
+    background-color: #D68A59; /* Styling similar to other button elements */
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .loan-item:hover {
+    background-color: #c77a50; /* Darker shade on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  }
+  
+  .loan-item:last-child {
+    margin-right: 0;
+  }  
