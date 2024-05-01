@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { Search } from "./Search";  // Import Search component
+import { EmbedLiveboard } from "./EmbedLiveboard";  // Import EmbedLiveboard component
 import '../styles/DistrictInsights.css';
 
 function DistrictInsights() {
@@ -12,8 +14,14 @@ function DistrictInsights() {
   useEffect(() => {
     fetch("http://localhost:8000/api/get/districts")
       .then(res => res.json())
-      .then(data => setDistricts(data.districts || []))
-      .catch(err => setError('Failed to fetch districts'));
+      .then(data => {
+        console.log("Districts fetched", data.districts);
+        setDistricts(data.districts || []);
+      })
+      .catch(err => {
+        console.error('Error fetching districts:', err);
+        setError('Failed to fetch districts');
+      });
   }, []);
 
   useEffect(() => {
@@ -25,10 +33,12 @@ function DistrictInsights() {
       })
       .then(res => res.json())
       .then(data => {
+        console.log("Insights fetched", data);
         setInsights(data);
         setLoading(false);
       })
       .catch(err => {
+        console.error('Error fetching insights:', err);
         setError('Failed to fetch district insights');
         setLoading(false);
       });
@@ -52,7 +62,7 @@ function DistrictInsights() {
           </option>
         ))}
       </select>
-      {insights && (
+      {insights && insights.insight && (
         <div>
           <PieChart width={400} height={400}>
             <Pie
@@ -74,6 +84,8 @@ function DistrictInsights() {
           </PieChart>
         </div>
       )}
+      <Search /> {/* ThoughtSpot Search component */}
+      <EmbedLiveboard /> {/* ThoughtSpot Liveboard component */}
       {error && <p className="error">{error}</p>}
     </div>
   );
