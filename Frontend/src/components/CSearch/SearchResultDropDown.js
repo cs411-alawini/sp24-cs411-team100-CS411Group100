@@ -1,6 +1,10 @@
 import { Button, Grid, MenuItem, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import usericon from "../../assets/user.png";
+import accounticon from "../../assets/account.png";
+import districticon from "../../assets/district.png";
+import loanicon from "../../assets/loan.png";
 
 export const SearchResultDropDown = (props) => {
     const { t } = useTranslation();
@@ -35,7 +39,8 @@ export const SearchResultDropDown = (props) => {
                         <Grid container className="search-data-item">
                             <Grid item className="member-data">
                                 <div style={{ marginRight: '8px' }}>
-                                    <i className="icons" aria-hidden="true">person</i>
+                                    {/* <i className="icons" aria-hidden="true">person</i> */}
+                                    <img src={usericon} className="search-icon" alt="User"/>
                                 </div>
                                 <div style={{ overflow: 'hidden' }}>
                                     <div className="member-row-name">{`${data.UserID}`}</div>
@@ -51,7 +56,8 @@ export const SearchResultDropDown = (props) => {
                         <Grid container className="search-data-item">
                             <Grid item className="member-data">
                                 <div style={{ marginRight: '8px' }}>
-                                    <i className="icons" aria-hidden="true">buildings</i>
+                                    {/* <i className="icons" aria-hidden="true">buildings</i> */}
+                                    <img src={accounticon} className="search-icon" alt="Account"/>
                                 </div>
                                 <div style={{ overflow: 'hidden' }}>
                                     <div className="member-row-name">{`${data.AccountID}`}</div>
@@ -68,7 +74,8 @@ export const SearchResultDropDown = (props) => {
                         <Grid container className="search-data-item">
                             <Grid item className="member-data">
                                 <div style={{ marginRight: '8px' }}>
-                                    <i className="icons" aria-hidden="true">buildings</i>
+                                    {/* <i className="icons" aria-hidden="true">buildings</i> */}
+                                    <img src={districticon} className="search-icon" alt="District"/>
                                 </div>
                                 <div style={{ overflow: 'hidden' }}>
                                     <div className="member-row-name">{`${data.DistrictName}`}</div>
@@ -84,7 +91,8 @@ export const SearchResultDropDown = (props) => {
                         <Grid container className="search-data-item">
                             <Grid item className="member-data">
                                 <div style={{ marginRight: '8px' }}>
-                                    <i className="icons" aria-hidden="true">buildings</i>
+                                    {/* <i className="icons" aria-hidden="true">buildings</i> */}
+                                    <img src={loanicon} className="search-icon" alt="Loan"/>
                                 </div>
                                 <div style={{ overflow: 'hidden' }}>
                                     <div className="member-row-name">{`${data.LoanID}`}</div>

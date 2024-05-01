@@ -2,6 +2,8 @@ import { Grid } from '@mui/material';
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { SearchResultDropDown } from './SearchResultDropDown';
+import searchicon from '../../assets/search-icon.png';
+import clearicon from '../../assets/clear-icon.png';
 import './styles.scss';
 
 class SearchInputBar extends Component {
@@ -45,7 +47,7 @@ class SearchInputBar extends Component {
           <Grid container className="search-input-container">
             <Grid item className="search-input">
               <Grid item className="search-icon">
-                <i className="icons" aria-hidden="true">search</i>
+                <img src={searchicon} className="search-icon" alt="Search"/>
               </Grid>
 
               <input
@@ -63,7 +65,7 @@ class SearchInputBar extends Component {
                     className="icons"
                     aria-hidden="true"
                     onClick={() => this.clearSearchInputValue()}
-                  >cancel_circle</i>
+                  ><img src={clearicon} className="search-icon" alt="Clear"/></i>
                 </Grid>
               )}
             </Grid>
