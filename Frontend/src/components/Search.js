@@ -5,7 +5,7 @@ export const Search = () => {
   React.useEffect(() => {
     const tsSearch = new SearchEmbed("#tse", {
       frameParams: {
-        width: "100%",
+        width: "1000px",
         height: "800px",
       },
     });
