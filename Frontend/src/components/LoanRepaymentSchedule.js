@@ -37,21 +37,24 @@ function LoanRepaymentSchedule({ loanId }) {
   if (!schedule.length) return <div>No Repayment Data</div>;
 
   return (
-    <div className="repayment-schedule">
-      <table>
+    <div className="repayment-schedule" >
+      <table style={{ width: '100%', margin: '0 auto' }}>
         <thead>
           <tr>
-            <th>Loan Month</th>
-            <th>Payment (USD)</th>
-            <th>Status</th>
+            <th className='loan-repayment-item-header'>Loan Month</th>
+            <th className='loan-repayment-item-header'>   Payment (USD)</th>
+            <th className='loan-repayment-item-header'>Status</th>
           </tr>
         </thead>
         <tbody>
           {schedule.map((item, index) => (
-            <tr key={index} className={item.PaymentStatus === "Paid" ? "paid" : "not-paid"}>
-              <td>{new Date(item.LoanMonth).toLocaleDateString()}</td>
-              <td>{item.Payment}</td>
-              <td>{item.PaymentStatus}</td>
+            <tr key={index} 
+            className={`${item.PaymentStatus === "Paid" ? "paid" : "not-paid"} loan-repayment-item`} 
+            // className={item.PaymentStatus === "Paid" ? "paid" : "not-paid"} 
+            style={{textAlign: 'center'}}>
+              <td className='loan-repayment-value'>{new Date(item.LoanMonth).toLocaleDateString()}</td>
+              <td className='loan-repayment-value'>{item.Payment}</td>
+              <td className='loan-repayment-value'>{item.PaymentStatus}</td>
             </tr>
           ))}
         </tbody>

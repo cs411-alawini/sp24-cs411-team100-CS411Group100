@@ -20,7 +20,7 @@
   display: flex;
   justify-content: space-around;
   width: 35%; /* Take up full container width */
-  height: 70px; /* Fixed height for button row */
+  height: 7%; /* Fixed height for button row */
 }
 
 .loan-option {
