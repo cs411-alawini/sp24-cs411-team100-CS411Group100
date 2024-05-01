@@ -10,7 +10,11 @@
     display: flex;  /* Ensures elements within input-row are lined up horizontally */
     align-items: center; /* Centers items vertically */
     width: 100%;
-    padding: 10px 0; /* Adds some padding for better spacing */
+    padding: 10px 0;
+    justify-content: center;
+    gap: 1%;
+    margin-bottom: -50px;
+    margin-top: -50px;
 }
 
 /* Input fields, selects, and buttons */

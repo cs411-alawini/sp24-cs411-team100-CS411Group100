@@ -9,6 +9,7 @@ import SettingsPageAccount from './components/SettingsPageAccount';
 import SettingsPageUser from './components/SettingsPageUser';
 import AdminLogin from './components/AdminLogin'; // Assuming you have this component
 import DistrictInsights from './components/Districtinsights'; // Make sure it's imported
+import SignUpForm from './components/SignUpForm';
 import './styles/App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/loans" element={<LoansPage />} />
           <Route path="/settingsaccount" element={<SettingsPageAccount />} />
           <Route path="/settingsuser" element={<SettingsPageUser />} />
+          <Route path="/signup" element={<SignUpForm />} />
           <Route path="/insights" element={<DistrictInsights />} /> {/* New route for District Insights */}
           
         </Routes>
