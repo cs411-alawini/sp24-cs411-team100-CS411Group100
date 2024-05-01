@@ -278,7 +278,7 @@ tt.Type;
 <img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/query1.png" alt="Alt text" width="600">
 
 #### Query 2
-This query retrieves information about users and their accounts, focusing on balances and credit scores. It links `User` details with their `Accounts` and `CreditScores`, filtering accounts with balances higher than the average for their district and users with credit scores higher than the overall average. The query ensures only active accounts and users are considered. Essentially, it helps identify users with above-average financial standings, potentially useful for targeted analysis or decision-making.
+This query retrieves information about users and their accounts, focusing on balances and credit scores. It links `User` details with their `Accounts` and `CreditScores`, filtering accounts with balances higher than the average for their district and users with credit scores higher than the overall average. The query ensures only active accounts and Female users are considered. Essentially, it helps identify users with above-average financial standings, potentially useful for targeted analysis or decision-making.
 ```sql
 SELECT
    U.UserID,
@@ -300,6 +300,7 @@ AND C.CreditScore > (
        FROM CreditScore C2
        WHERE C2.IsDeleted = FALSE
    )
+AND U.Gender = 'F'
 AND A.IsDeleted = FALSE
 AND U.IsDeleted = FALSE;
 ```
@@ -565,12 +566,14 @@ The initial analysis reveals that indexing the date of birth does not change the
 Indexing fields with low cardinality, such as gender, can result in unforeseen changes in query cost estimations. The significant cost increase observed upon indexing such fields underscores the necessity for careful planning and testing when implementing indexes. The impact of indexing varies greatly depending on the query and data structure involved. While indexes are essential for improving query execution times, their effect on cost estimations requires careful evaluation. This is to ensure that indexing provides the intended performance improvements without unduly complicating the execution plan or escalating resource requirements.
 
 ### Query 2
-For this query, the `CreditScore` attribute in the `CreditScore` table was indexed.
+For this query, the `CreditScore` and `Gender` attributes were indexed.
 
-| Index Config | Join Cost | CreditScore Avg Cost |
-|--------------|:------:|:----:|
-| No Index           | 764.93 | 334.75 |
-| CreditScore Index  | 687.04 | 334.75 |
+| Index Config | Join Cost |
+|--------------|:------:|
+| No Index                    | 320.81 |
+| CreditScore Index           | 322.25 |
+| Gender Index                | 100.98 |
+| CreditScore + Gender Index  | 108.11 |
 
 No Index:
 
@@ -580,9 +583,7 @@ CreditScore Index:
 
 <img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index2_2.png" alt="Alt text" width="600">
 
-Indexing on the CreditScore column led to a noticeable improvement in query performance, which was reflected in both the reduced overall cost and the more efficient execution time.
-
-The implementation of indexing on the CreditScore column underscores the value of indexing for optimizing database queries, especially those involving conditional logic based on averages or specific thresholds. While the cost reduction was modest, the improvement in execution time indicates a more efficient data retrieval process, emphasizing that indexing can significantly enhance performance by enabling faster access to relevant data. This case exemplifies the need for targeted indexing strategies that address specific performance bottlenecks in database operations.
+The addition of indexing on both the Gender and CreditScore attributes has yielded a combined effect, further optimizing the query's execution plan. The nested loop join cost, when both attributes are indexed, has shown an increment compared to indexing Gender alone, suggesting a more complex interplay between indexes. This result emphasizes the comprehensive approach to indexing, considering not only individual column characteristics but also their combined impact on the query's performance.
 
 ### Query 3
 For this query, the `Gender` attribute in the `User` table and the `DistrictName` attribute in the `District` table were indexed.
@@ -591,6 +592,7 @@ For this query, the `Gender` attribute in the `User` table and the `DistrictName
 | No Index           | 145.53 |
 | Gender Index  | 145.53| 
 | DistrictName Index | 145.53|
+| Gender + DistrictName Index | 145.53|
 
 No Index:
 
@@ -604,9 +606,9 @@ DistrictName Index:
 
 <img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index3_3.png" alt="Alt text" width="600">
 
-The outputs before and after implementing indexes on DistrictName and Gender reveals a nuanced effect on query performance. Despite the introduction of indexes, the overall cost metrics and execution times show minimal fluctuation, indicating a balanced optimization by the database's query planner. The steady performance, particularly in operations like index lookups and filters, highlights the indexes' role in ensuring consistent data access speeds despite the added complexity of sorting and aggregating large datasets.
+The outputs before and after implementing indexes on DistrictName, Gender and their combination reveals a nuanced effect on query performance. Despite the introduction of indexes, the overall cost metrics and execution times show minimal fluctuation, indicating a balanced optimization by the database's query planner. The steady performance, particularly in operations like index lookups and filters, highlights the indexes' role in ensuring consistent data access speeds despite the added complexity of sorting and aggregating large datasets.
 
-The consistent query performance post-indexing on DistrictName and Gender underscores the strategic advantage of selective indexing in complex database queries. This scenario illustrates that proper indexing, even on columns with varied cardinality like DistrictName (high) and Gender (low), can effectively support the database in sustaining efficient query execution without significant cost penalties. 
+The consistent query performance post-indexing on DistrictName, Gender and their combination underscores the strategic advantage of selective indexing in complex database queries. This scenario illustrates that proper indexing, even on columns with varied cardinality like DistrictName (high) and Gender (low), can effectively support the database in sustaining efficient query execution without significant cost penalties. 
 
 ### Query 4
 For this query, the `DistrictName` attribute in the `District` table and the `Value` attribute in the `DistrictStats` table were indexed.
@@ -615,6 +617,7 @@ For this query, the `DistrictName` attribute in the `District` table and the `Va
 | No Index           | 401.02 |
 | DistrictName Index  | 401.02 | 
 | Value Index | 401.02 |
+| DistrictName + Value Index | 401.02 |
 
 No Index:
 
@@ -628,7 +631,7 @@ Value Index:
 
 <img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index4_3.png" alt="Alt text" width="600">
 
-The estimated cost for processing the query remained unchanged at 401.02, regardless of whether indexes were added to DistrictName or the Value of DistrictStats. This consistency in cost estimates suggests that the indexing efforts didn't influence the database's internal predictions about how much work was needed to execute the query. Interestingly, even though indexes were applied, they didn't seem to sway the performance metrics according to the database's cost model. It's possible that the size of the data being queried was too small for the indexing to make a noticeable difference in performance from the database's perspective.
+The estimated cost for processing the query remained unchanged at 401.02, regardless of whether indexes were added to the combination DistrictName or the Value attribute of DistrictStats. This consistency in cost estimates suggests that the indexing efforts didn't influence the database's internal predictions about how much work was needed to execute the query. Interestingly, even though indexes were applied, they didn't seem to sway the performance metrics according to the database's cost model. It's possible that the size of the data being queried was too small for the indexing to make a noticeable difference in performance from the database's perspective.
 
 The fact that all cost estimates stayed the same at 401.02, even after indexing, indicates that the addition of indexes did not significantly impact the performance. This could imply that the datasets involved in the queries are relatively small, and therefore, the potential performance gains from indexing were not substantial enough to be detected by the cost estimation model. In scenarios where the data size is not large, the database's existing mechanisms for handling queries might already be so efficient that indexes don't offer a noticeable improvement within the scope of this specific analysis.
 
