@@ -5,7 +5,7 @@ import '../styles/Accounts.css';
 
 function Accounts() {
   const [accounts, setAccounts] = useState([]);
-  const [error, setError] = useState('');
+  const [error] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function Accounts() {
       })
       .catch(error => {
         console.error('Error:', error);
-        setError('Failed to load accounts. Please try again later.');
+        // setError('Failed to load accounts. Please try again later.');
       });
   }, []);
 
