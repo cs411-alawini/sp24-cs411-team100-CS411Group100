@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import ActionButton from './ActionButton';
 import TransactionsDropdown from './TransactionsDropdown';
 import TransferForm from './TransferForm';
-import AnalyzeDropdown from './AnalyzeDropdown';  // Make sure to create and import this component
+// import AnalyzeDropdown from './AnalyzeDropdown'; 
 import '../styles/ButtonPanel.css';
 
 function ButtonPanel({ toggleTransactions, showTransactions, toggleLoans, accountId, refreshBalance, fontSize }) {
   const [showTransferForm, setShowTransferForm] = useState(false);
-  const [showAnalyze, setShowAnalyze] = useState(false); // State to toggle analyze dropdown
+  // const [showAnalyze, setShowAnalyze] = useState(false); 
   const navigate = useNavigate();
 
   // Font size class determination
@@ -32,11 +32,11 @@ function ButtonPanel({ toggleTransactions, showTransactions, toggleLoans, accoun
           className={`action-button loans-button ${fontSizeClass}`}
           onClick={toggleLoans}
         />
-        <ActionButton 
+        {/* <ActionButton 
           label="Analyze" 
           className={`action-button analyze-button ${fontSizeClass}`}
           onClick={() => setShowAnalyze(!showAnalyze)} 
-        />
+        /> */}
         <ActionButton 
           label="Back to Accounts" 
           className={`action-button back-to-accounts-button ${fontSizeClass}`}
@@ -45,7 +45,7 @@ function ButtonPanel({ toggleTransactions, showTransactions, toggleLoans, accoun
       </div>
       {showTransferForm && <TransferForm accountId={accountId} refreshBalance={refreshBalance} />}
       {showTransactions && <TransactionsDropdown accountId={accountId} />}
-      {showAnalyze && <AnalyzeDropdown accountId={accountId} />} 
+      {/* {showAnalyze && <AnalyzeDropdown accountId={accountId} />}  */}
     </div>
   );
 }
