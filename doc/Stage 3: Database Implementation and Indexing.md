@@ -583,6 +583,14 @@ CreditScore Index:
 
 <img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index2_2.png" alt="Alt text" width="600">
 
+Gender Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index2_3.png" alt="Alt text" width="600">
+
+CreditScore + Gender Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index2_4.png" alt="Alt text" width="600">
+
 The addition of indexing on both the Gender and CreditScore attributes has yielded a combined effect, further optimizing the query's execution plan. The nested loop join cost, when both attributes are indexed, has shown an increment compared to indexing Gender alone, suggesting a more complex interplay between indexes. This result emphasizes the comprehensive approach to indexing, considering not only individual column characteristics but also their combined impact on the query's performance.
 
 ### Query 3
@@ -605,6 +613,10 @@ Gender Index:
 DistrictName Index:
 
 <img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index3_3.png" alt="Alt text" width="600">
+
+Gender + DistrictName Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index3_4.png" alt="Alt text" width="600">
 
 The outputs before and after implementing indexes on DistrictName, Gender and their combination reveals a nuanced effect on query performance. Despite the introduction of indexes, the overall cost metrics and execution times show minimal fluctuation, indicating a balanced optimization by the database's query planner. The steady performance, particularly in operations like index lookups and filters, highlights the indexes' role in ensuring consistent data access speeds despite the added complexity of sorting and aggregating large datasets.
 
@@ -630,6 +642,10 @@ DistrictName Index:
 Value Index:
 
 <img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index4_3.png" alt="Alt text" width="600">
+
+DistrictName + Value Index:
+
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/index4_4.png" alt="Alt text" width="600">
 
 The estimated cost for processing the query remained unchanged at 401.02, regardless of whether indexes were added to the combination DistrictName or the Value attribute of DistrictStats. This consistency in cost estimates suggests that the indexing efforts didn't influence the database's internal predictions about how much work was needed to execute the query. Interestingly, even though indexes were applied, they didn't seem to sway the performance metrics according to the database's cost model. It's possible that the size of the data being queried was too small for the indexing to make a noticeable difference in performance from the database's perspective.
 
