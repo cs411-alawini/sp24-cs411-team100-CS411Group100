@@ -589,10 +589,10 @@ The addition of indexing on both the Gender and CreditScore attributes has yield
 For this query, the `Gender` attribute in the `User` table and the `DistrictName` attribute in the `District` table were indexed.
 | Index Config | Cost |
 |--------------|:------:|
-| No Index           | 145.53 |
-| Gender Index  | 145.53| 
-| DistrictName Index | 145.53|
-| Gender + DistrictName Index | 145.53|
+| No Index           | 145.56 |
+| Gender Index  | 145.56 | 
+| DistrictName Index | 145.56 |
+| Gender + DistrictName Index | 145.56 |
 
 No Index:
 
