@@ -1,39 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { PieChart, Pie, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { PieChart, Pie, Tooltip, Legend, Cell } from 'recharts';
+import '../styles/AnalyzeDropdown.css';  // Ensure you have some basic styling for the chart
 
 function AnalyzeDropdown({ accountId }) {
-    const [data, setData] = useState({
-        categoryData: [],
-        monthlyAverageData: []
-    });
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        // Replace this URL with your actual API endpoint
-        fetch(`http://localhost:8000/api/transaction/2080?page=1&limit=20000`)
-            .then(response => response.json())
-            .then(data => {
-                setData({
-                    categoryData: data.categoryData,
-                    monthlyAverageData: data.monthlyAverageData
-                });
-            })
-            .catch(error => console.error('Error fetching analysis data:', error));
+        setLoading(true);
+        const token = localStorage.getItem('token');
+        const headers = new Headers({
+            'Authorization': `Bearer ${token}`
+        });
+
+        fetch(`http://localhost:8000/api/transaction/${accountId}`, {
+            method: 'GET',
+            headers: headers
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data && data.transactionSummary) {
+                const processedData = processChartData(data.transactionSummary);
+                setData(processedData);
+            } else {
+                throw new Error('Transaction data is missing in the response');
+            }
+        })
+        .catch(err => {
+            setError(err.message);
+            console.error('Error:', err);
+        })
+        .finally(() => {
+            setLoading(false);
+        });
     }, [accountId]);
+
+    const processChartData = (transactions) => {
+        const totals = transactions.reduce((acc, { TransactionType, Amount }) => {
+            const amount = parseFloat(Amount);
+            if (!acc[TransactionType]) {
+                acc[TransactionType] = 0;
+            }
+            acc[TransactionType] += amount;
+            return acc;
+        }, {});
+
+        return Object.keys(totals).map(type => ({ name: type, value: totals[type] }));
+    };
+
+    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28FD0'];
 
     return (
         <div className="analyze-dropdown">
-            <PieChart width={400} height={400}>
-                <Pie dataKey="value" isAnimationActive={false} data={data.categoryData} cx={200} cy={200} outerRadius={80} fill="#8884d8" label />
-                <Tooltip />
-            </PieChart>
-            <BarChart width={500} height={300} data={data.monthlyAverageData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="value" fill="#82ca9d" />
-            </BarChart>
+            {loading ? <div>Loading...</div> :
+                error ? <div className="error">{error}</div> :
+                <PieChart width={400} height={400}>
+                    <Pie data={data} cx={200} cy={200} outerRadius={100} label>
+                        {data.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                </PieChart>
+            }
         </div>
     );
 }

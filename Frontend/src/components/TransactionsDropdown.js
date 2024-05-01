@@ -77,7 +77,7 @@ function TransactionsDropdown({ accountId }) {
         <div className="transaction-detail-label">Type</div>
         <div className="transaction-detail-label">Mode</div>
         <div className="transaction-detail-label">Amount</div>
-        <div className="transaction-detail-label">Category</div>
+        
       </div>
       {transactions.map((transaction, index) => (
         <div key={index} className="transaction-item">
@@ -86,7 +86,7 @@ function TransactionsDropdown({ accountId }) {
           <div className="transaction-detail-value">{transaction.TransactionType}</div>
           <div className="transaction-detail-value">{transaction.TransactionMode}</div>
           <div className="transaction-detail-value">${transaction.Amount}</div>
-          <div className="transaction-detail-value">{transaction.Category}</div>
+          
         </div>
       ))}
       <div className="pagination-controls">

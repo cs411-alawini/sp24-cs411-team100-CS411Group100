@@ -1,0 +1,55 @@
+.admin-login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Use full screen height to center vertically */
+    background-color: #E6E6FA; /* Light lavender background for admin login */
+}
+
+.admin-login-form .logo {
+    margin-bottom: 50px;
+    background-color: #A52A2A; /* A deeper shade for admin distinguishing */
+    padding: 20px;
+    border-radius: 5px;
+    color: white; /* Ensuring logo text is visible */
+    font-size: 1.5em; /* Slightly larger text for emphasis */
+}
+
+.admin-login-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-login-form input {
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 250px; /* Set a fixed width for inputs */
+    background-color: #FFF; /* Lighter input fields for contrast */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.admin-login-form button {
+    background-color: #A52A2A; /* Match the logo background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px; /* Set a fixed width for the button */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Stronger shadow for buttons */
+}
+
+.admin-login-form div {
+    margin-top: 20px;
+}
+
+.admin-login-form span {
+    color: #555;
+    cursor: pointer;
+    text-decoration: underline;
+}
