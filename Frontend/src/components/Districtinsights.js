@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
-import { Search } from "./Search";  // Import Search component
-import { EmbedLiveboard } from "./EmbedLiveboard";  // Import EmbedLiveboard component
+import React, { useEffect, useState } from 'react';
+import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
 import '../styles/DistrictInsights.css';
+import SearchBar from "./CSearch/SearchBar";
+import { EmbedLiveboard } from "./EmbedLiveboard"; // Import EmbedLiveboard component
+import { Search } from "./Search"; // Import Search component
 
 function DistrictInsights() {
   const [districts, setDistricts] = useState([]);
@@ -52,6 +53,12 @@ function DistrictInsights() {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   return (
+    <div>
+      <SearchBar
+          searchCategory={['User', 'Account', 'District', 'Loan']}
+          setSelectedOption={() => { }}
+          placeholder={"Search value"}
+        />
     <div className="district-insights">
       <h1>District Insights</h1>
       <select onChange={handleDistrictChange} value={selectedDistrict} disabled={loading}>
@@ -87,6 +94,7 @@ function DistrictInsights() {
       <Search /> {/* ThoughtSpot Search component */}
       <EmbedLiveboard /> {/* ThoughtSpot Liveboard component */}
       {error && <p className="error">{error}</p>}
+    </div>
     </div>
   );
 }

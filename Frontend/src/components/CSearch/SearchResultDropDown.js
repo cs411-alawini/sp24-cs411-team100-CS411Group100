@@ -2,20 +2,11 @@ import { Button, Grid, MenuItem, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export type SearchResultDropDownProps = {
-    queriedDatas: any;
-    collections: string[];
-    types: string[];
-    setSelectedFilterType: (value: string) => void;
-    setSelectedOption: (value: any) => void;
-}
-
-export const SearchResultDropDown = (props: SearchResultDropDownProps) => {
+export const SearchResultDropDown = (props) => {
     const { t } = useTranslation();
-    const defaultLastIndex = 4
+    const defaultLastIndex = 4;
     const { queriedDatas, types, collections, setSelectedFilterType, setSelectedOption } = props;
-    const [selectedType, setSelectedType] = useState<string>();
-
+    const [selectedType, setSelectedType] = useState();
 
     useEffect(() => {
         for (let item of collections) {
@@ -26,115 +17,88 @@ export const SearchResultDropDown = (props: SearchResultDropDownProps) => {
         }
     }, [queriedDatas]);
 
-    const toggleSelectedType = (type: string) => {
+    const toggleSelectedType = (type) => {
         if (type === selectedType) {
             setSelectedType(types[0]);
-            setSelectedFilterType(types[0])
-        }
-        else {
+            setSelectedFilterType(types[0]);
+        } else {
             setSelectedType(type);
-            setSelectedFilterType(type)
+            setSelectedFilterType(type);
         }
-    }
+    };
 
-    const getMenuItem = (collection: any, data: any) => {
+    const getMenuItem = (collection, data) => {
         switch (collection) {
-            case 'employees':
+            case 'User':
                 return (
-                    <MenuItem
-                        key={`${data.id}`}
-                        // onClick={(e: any) => {
-                        //     window.location.pathname = `/members/${data.id}`
-                        //     data.category = collection;
-                        //     setSelectedOption(data);
-                        // }}
-                    >
+                    <MenuItem key={`u_${data.UserID}`}>
                         <Grid container className="search-data-item">
-                            <Grid item={true} className="member-data">
+                            <Grid item className="member-data">
                                 <div style={{ marginRight: '8px' }}>
                                     <i className="icons" aria-hidden="true">person</i>
                                 </div>
                                 <div style={{ overflow: 'hidden' }}>
-                                    <div className="member-row-name">{`${data.name}`}</div>
-                                    <div className="member-row-email">{data.email}</div>
+                                    <div className="member-row-name">{`${data.UserID}`}</div>
+                                    <div className="member-row-email">{data.Gender}</div>
                                 </div>
                             </Grid>
                         </Grid>
                     </MenuItem>
-                )
-            case 'sectors':
+                );
+            case 'Account':
                 return (
-                    <MenuItem
-                        key={`${data.id}`}
-                        // onClick={(e: any) => {
-                        //     window.location.pathname = `/divisions/${data.id}`
-                        //     data.category = collection;
-                        //     setSelectedOption(data);
-                        // }}
-                    >
+                    <MenuItem key={`a_${data.AccountID}`}>
                         <Grid container className="search-data-item">
-                            <Grid item={true} className="member-data">
+                            <Grid item className="member-data">
                                 <div style={{ marginRight: '8px' }}>
                                     <i className="icons" aria-hidden="true">buildings</i>
                                 </div>
                                 <div style={{ overflow: 'hidden' }}>
-                                    <div className="member-row-name">{`${data.name}`}</div>
+                                    <div className="member-row-name">{`${data.AccountID}`}</div>
+                                    <div className="member-row-email">{data.Balance}</div>
                                 </div>
                             </Grid>
                         </Grid>
                     </MenuItem>
-                )
+                );
 
-            case 'divisions':
+            case 'District':
                 return (
-                    <MenuItem
-                        key={`${data.id}`}
-                        // onClick={(e: any) => {
-                        //     window.location.pathname = `/divisions/${data.sector}/${data.id}`
-                        //     data.category = collection;
-                        //     setSelectedOption(data);
-                        // }}
-                    >
+                    <MenuItem key={`d_${data.DistrictID}`}>
                         <Grid container className="search-data-item">
-                            <Grid item={true} className="member-data">
+                            <Grid item className="member-data">
                                 <div style={{ marginRight: '8px' }}>
                                     <i className="icons" aria-hidden="true">buildings</i>
                                 </div>
                                 <div style={{ overflow: 'hidden' }}>
-                                    <div className="member-row-name">{`${data.name}`}</div>
-                                    <div className="member-row-email">{data.sectors[0].name}</div>
+                                    <div className="member-row-name">{`${data.DistrictName}`}</div>
+                                    <div className="member-row-email">{data.Region}</div>
                                 </div>
                             </Grid>
                         </Grid>
                     </MenuItem>
-                )
-            case 'projects':
+                );
+            case 'Loan':
                 return (
-                    <MenuItem
-                        key={`${data.id}`}
-                        // onClick={(e: any) => {
-                        //     window.location.pathname = `/divisions/${data.ownedSector}/${data.ownedBy}/${data.id}`
-                        //     data.category = collection;
-                        //     setSelectedOption(data);
-                        // }}
-                    >
+                    <MenuItem key={`l_${data.LoanID}`}>
                         <Grid container className="search-data-item">
-                            <Grid item={true} className="member-data">
+                            <Grid item className="member-data">
                                 <div style={{ marginRight: '8px' }}>
                                     <i className="icons" aria-hidden="true">buildings</i>
                                 </div>
                                 <div style={{ overflow: 'hidden' }}>
-                                    <div className="member-row-name">{`${data.name}`}</div>
-                                    <div className="member-row-email">{`${data.divisions[0].name}(${data.sectors[0].name})`}</div>
+                                    <div className="member-row-name">{`${data.LoanID}`}</div>
+                                    <div className="member-row-email">{`${data.Amount}`}</div>
                                 </div>
                             </Grid>
                         </Grid>
                     </MenuItem>
-                )
+                );
 
+            default:
+                return null;
         }
-    }
-
+    };
 
     return (
         <Grid item>
@@ -144,7 +108,7 @@ export const SearchResultDropDown = (props: SearchResultDropDownProps) => {
                         key={`${item}_${i}`}
                         value={item}
                         className={`filter-chip ${item === selectedType ? 'selected' : 'available'}`}
-                        onClick={(e: any) => {
+                        onClick={() => {
                             toggleSelectedType(item);
                         }}
                     >
@@ -159,7 +123,7 @@ export const SearchResultDropDown = (props: SearchResultDropDownProps) => {
             </div>
             <div className="search-data-container">
                 {collections.map((item, i) => (
-                    queriedDatas[item] && item == selectedType &&
+                    // queriedDatas[item] && item == selectedType &&
                     (<div style={{ margin: '4px 0' }} key={`${item}_${i}`} >
                         <Typography variant="h6" className="search-data-header">
                             {t(`${item}`)}
@@ -177,7 +141,7 @@ export const SearchResultDropDown = (props: SearchResultDropDownProps) => {
                                     height: (queriedDatas[item].length > defaultLastIndex) ? `${defaultLastIndex * 48}px` : `${queriedDatas[item].length * 48}px`
                                 }}
                             >
-                                {queriedDatas[item].map((data: any, i: any) => (
+                                {queriedDatas[item].map((data, i) => (
                                     getMenuItem(item, data)
                                 ))}
                             </div>
@@ -187,7 +151,5 @@ export const SearchResultDropDown = (props: SearchResultDropDownProps) => {
                 ))}
             </div>
         </Grid >
-
-    )
-
-}
+    );
+};
