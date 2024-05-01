@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { PieChart, Pie, Tooltip, Legend, Cell } from 'recharts';
-import '../styles/AnalyzeDropdown.css';  // Ensure you have some basic styling for the chart
+import React, { useEffect, useState } from 'react';
+import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
+import '../styles/AnalyzeDropdown.css'; // Ensure you have some basic styling for the chart
 
 function AnalyzeDropdown({ accountId }) {
     const [data, setData] = useState([]);
@@ -14,7 +14,7 @@ function AnalyzeDropdown({ accountId }) {
             'Authorization': `Bearer ${token}`
         });
 
-        fetch(`http://localhost:8000/api/transaction/${accountId}`, {
+        fetch(`/api/transaction/${accountId}`, {
             method: 'GET',
             headers: headers
         })

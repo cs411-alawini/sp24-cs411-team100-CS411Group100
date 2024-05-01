@@ -20,7 +20,7 @@ function LoansDisplay() {
       };
 
       try {
-        const response = await fetch("http://localhost:8000/api/get/loanTypes", requestOptions);
+        const response = await fetch("/api/get/loanTypes", requestOptions);
         const result = await response.json();
         const types = result.loanTypes.reduce((acc, type) => {
           acc[type.LoanTypeID] = type.Type;
@@ -47,7 +47,7 @@ function LoansDisplay() {
       };
 
       try {
-        const response = await fetch(`http://localhost:8000/api/loan/${accountId}`, requestOptions);
+        const response = await fetch(`/api/loan/${accountId}`, requestOptions);
         const result = await response.json();
         setLoans(result.loans);
         setLoading(false);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/UserDetailsComponent.css';
 
 function UserDetailsComponent() {
@@ -16,7 +16,7 @@ function UserDetailsComponent() {
         const myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${token}`);
 
-        fetch("http://localhost:8000/api/user", {
+        fetch("/api/user", {
             method: "GET",
             headers: myHeaders,
             redirect: "follow"
@@ -53,7 +53,7 @@ function UserDetailsComponent() {
         urlencoded.append("DateOfBirth", userDetails.DateOfBirth);
         urlencoded.append("Gender", userDetails.Gender);
 
-        fetch("http://localhost:8000/api/user", {
+        fetch("/api/user", {
             method: "PUT",
             headers: myHeaders,
             body: urlencoded,

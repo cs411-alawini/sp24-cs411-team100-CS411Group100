@@ -18,7 +18,7 @@ function DeleteUserComponent({ setShowDeleteUser }) {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8000/api/user", requestOptions)
+        fetch("/api/user", requestOptions)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

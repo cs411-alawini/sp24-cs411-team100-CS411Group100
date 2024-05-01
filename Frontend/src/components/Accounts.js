@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Header from './HeaderUser.js';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Accounts.css';
+import Header from './HeaderUser.js';
 
 function Accounts() {
   const [accounts, setAccounts] = useState([]);
@@ -19,7 +19,7 @@ function Accounts() {
       redirect: "follow"
     };
 
-    fetch("http://localhost:8000/api/account", requestOptions)
+    fetch("/api/account", requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

@@ -13,7 +13,7 @@ function DistrictInsights() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/get/districts")
+    fetch("/api/get/districts")
       .then(res => res.json())
       .then(data => {
         console.log("Districts fetched", data.districts);
@@ -29,7 +29,7 @@ function DistrictInsights() {
     if (selectedDistrict) {
       setLoading(true);
       const token = localStorage.getItem('token');
-      fetch(`http://localhost:8000/api/employee/insight?DistrictId=${selectedDistrict}`, {
+      fetch(`/api/employee/insight?DistrictId=${selectedDistrict}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(res => res.json())

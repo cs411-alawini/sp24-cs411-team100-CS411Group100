@@ -25,7 +25,7 @@ function LoginForm() {
       redirect: "follow"
     };
 
-    fetch("http://localhost:8000/api/auth/token", requestOptions)
+    fetch("/api/auth/token", requestOptions)
       .then(response => response.json())
       .then(result => {
       if (result.token) {

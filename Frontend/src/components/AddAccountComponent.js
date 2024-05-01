@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/AddAccountComponent.css'; // Ensure the path is correct
 
 function AddAccountComponent() {
@@ -17,7 +17,7 @@ function AddAccountComponent() {
             redirect: "follow"
         };
 
-        fetch("http://localhost:8000/api/get/districts", requestOptions)
+        fetch("/api/get/districts", requestOptions)
             .then(response => response.json())
             .then(result => setDistricts(result.districts))
             .catch(error => console.error("Failed to fetch districts", error));
@@ -56,7 +56,7 @@ function AddAccountComponent() {
             redirect: "follow"
         };
 
-        fetch("http://localhost:8000/api/account", requestOptions)
+        fetch("/api/account", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.message === "Account created successfully") {

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from './HeaderAccount.js';
+import '../styles/Dashboard.css';
 import BalanceDisplay from './BalanceDisplay.js';
 import ButtonPanel from './ButtonPanel.js';
-import '../styles/Dashboard.css';
+import Header from './HeaderAccount.js';
 import LoansPage from './LoansPage';
 
 function Dashboard() {
@@ -21,7 +21,7 @@ function Dashboard() {
       const token = localStorage.getItem('token');
       myHeaders.append("Authorization", `Bearer ${token}`);
 
-      fetch(`http://localhost:8000/api/account`, {
+      fetch(`/api/account`, {
         method: 'GET',
         headers: myHeaders,
       })
@@ -64,7 +64,7 @@ function Dashboard() {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
   
-    fetch("http://localhost:8000/api/account", {
+    fetch("/api/account", {
       method: "GET",
       headers: myHeaders,
       redirect: "follow"

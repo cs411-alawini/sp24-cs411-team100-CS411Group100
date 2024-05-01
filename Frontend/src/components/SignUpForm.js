@@ -34,7 +34,7 @@ function SignUpForm() {
             redirect: "follow"
         };
 
-        fetch("http://localhost:8000/api/user", requestOptions)
+        fetch("/api/user", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.message === "User created successfully") {

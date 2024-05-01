@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/LoanRepaymentSchedule.css';  // Make sure this path is correct
+import '../styles/LoanRepaymentSchedule.css'; // Make sure this path is correct
 
 function LoanRepaymentSchedule({ loanId }) {
   const [schedule, setSchedule] = useState([]);
@@ -19,7 +19,7 @@ function LoanRepaymentSchedule({ loanId }) {
       redirect: 'follow'
     };
 
-    fetch(`http://localhost:8000/api/loan/${accountID}/repaymentSchedule/${loanId}`, requestOptions)
+    fetch(`/api/loan/${accountID}/repaymentSchedule/${loanId}`, requestOptions)
       .then(response => response.json())
       .then(result => {
         setSchedule(result.repaymentSchedule);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/TransferForm.css';
 
 function TransferForm({ accountId, refreshBalance }) {
@@ -14,7 +14,7 @@ function TransferForm({ accountId, refreshBalance }) {
     // Fetch transaction types
     const fetchTransactionTypes = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/get/transactionTypes", {
+        const response = await fetch("/api/get/transactionTypes", {
           method: "GET",
           headers: {
             "Cookie": "connect.sid=s%3Ap4rmRdOMWVPRv5qVxNHpn0EYWa-_PAsG.k%2BMyo%2Fr3as3hlCYQH%2FNK3LTv4VhbzIPMomr9SnRS%2B2E"
@@ -31,7 +31,7 @@ function TransferForm({ accountId, refreshBalance }) {
     // Fetch transaction modes
     const fetchTransactionModes = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/get/transactionModes", {
+        const response = await fetch("/api/get/transactionModes", {
           method: "GET",
           headers: {
             "Cookie": "connect.sid=s%3Ap4rmRdOMWVPRv5qVxNHpn0EYWa-_PAsG.k%2BMyo%2Fr3as3hlCYQH%2FNK3LTv4VhbzIPMomr9SnRS%2B2E"
@@ -64,7 +64,7 @@ function TransferForm({ accountId, refreshBalance }) {
     urlencoded.append("TransactionModeID", transactionMode);
 
     try {
-      const response = await fetch("http://localhost:8000/api/transaction/transfer", {
+      const response = await fetch("/api/transaction/transfer", {
         method: "POST",
         headers: myHeaders,
         body: urlencoded,

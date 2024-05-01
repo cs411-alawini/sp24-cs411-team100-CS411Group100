@@ -47,11 +47,16 @@ app.use(session({
 
 app.use('/doc', express.static(path.join(__dirname, 'public/doc')))
 app.use('/api', apiRouter)
+console.log(__dirname)
+
+app.use(express.static(path.resolve(__dirname, "build")));
+      app.get("/", (req, res) => {
+        res.sendFile(join(__dirname,'dist/index.html'));
+      });
 
 app.listen(port, () => {
   logger.info("http server is listening on port " + port)
 })
-
 // In azure, it was worked with below code
 // app.set('port', port);
 // var server = http.createServer(app);

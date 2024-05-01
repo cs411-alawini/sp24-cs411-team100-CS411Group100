@@ -26,7 +26,7 @@ function AdminLogin() {
       redirect: "follow"
     };
 
-    fetch("http://localhost:8000/api/auth/employeeToken", requestOptions)
+    fetch("/api/auth/employeeToken", requestOptions)
       .then(response => response.json())
       .then(result => {
         if (result.token) {

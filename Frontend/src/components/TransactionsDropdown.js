@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/TransactionsDropdown.css';
 
 function TransactionsDropdown({ accountId }) {
@@ -39,7 +39,7 @@ function TransactionsDropdown({ accountId }) {
       limit: itemsPerPage
     });
 
-    fetch(`http://localhost:8000/api/transaction/${accountId}?${queryParams}`, {
+    fetch(`/api/transaction/${accountId}?${queryParams}`, {
       method: 'GET',
       headers: myHeaders
     })

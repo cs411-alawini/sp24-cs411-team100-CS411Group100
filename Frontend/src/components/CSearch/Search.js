@@ -6,7 +6,7 @@ export const searchNotifications = async (searchQuery, requestId, signal, search
         searchCategory.forEach((category, i) => {
             query += ((i !== 0) ? ',' : '') + category;
         })
-        var response = await fetchReq('http://localhost:8000/api/search?searchKey='+searchQuery + '&searchAttribute='+ query, {
+        var response = await fetchReq('/api/search?searchKey='+searchQuery + '&searchAttribute='+ query, {
             method: "GET",
             signal: signal
         });

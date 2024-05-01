@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/UserDetailsComponent.css';
 
 function UpdateAccountComponent({ setShowUpdateAccount }) {
@@ -18,8 +18,8 @@ function UpdateAccountComponent({ setShowUpdateAccount }) {
         });
     
         Promise.all([
-            fetch(`http://localhost:8000/api/account/${accountID}`, { method: "GET", headers }),
-            fetch("http://localhost:8000/api/get/districts", { method: "GET", headers })
+            fetch(`/api/account/${accountID}`, { method: "GET", headers }),
+            fetch("/api/get/districts", { method: "GET", headers })
         ])
         .then(responses => Promise.all(responses.map(res => res.json())))
         .then(([accountData, districtData]) => {
@@ -57,7 +57,7 @@ function UpdateAccountComponent({ setShowUpdateAccount }) {
             redirect: "follow"
         };
 
-        fetch(`http://localhost:8000/api/account/${localStorage.getItem('accountId')}`, requestOptions)
+        fetch(`/api/account/${localStorage.getItem('accountId')}`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 setMessage("Account updated successfully");
