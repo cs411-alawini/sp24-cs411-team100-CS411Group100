@@ -1,28 +1,69 @@
 .login-choice {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Use full screen height to center vertically */
-    background-color: #F0E68C;
-    ; /* Adjust the color to match your design */
-  }
-  
-  .login-choice .logo {
-    margin-bottom: 100px; /* Increase spacing between logo and buttons */
-    background-color: #D68A59; /* Adjust the color to match your design */
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .login-choice .login-button {
-    background-color: #E1A95F; /* Adjust the color to match your design */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 200px; /* Set a fixed width for the buttons */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Use full screen height to center vertically */
+ 
+}
+
+.logo img {
+  width: 200px; /* Adjust according to the size of your logo */
+  height: auto;
+  margin-bottom: 5%; /* Increase spacing between logo and buttons */
+}
+
+.login-button {
+  background-color: #E1A95F; /* Soft orange */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+}
+
+/**/
+
+.login-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to right, #eead62cc, #ffe8b2);
+  font-family: 'Arial', sans-serif;
+}
+
+.logo {
+  margin-bottom: 50px; /* Increased spacing for visual separation */
+}
+
+.logo img {
+  width: 180px; /* Larger logo for better visibility */
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo img:hover {
+  transform: scale(1.1); /* Subtle zoom effect on hover */
+}
+
+.login-button {
+  padding: 12px 35px;
+  margin: 10px 0; /* Consistent spacing around buttons */
+  font-size: 18px; /* Larger font for readability */
+  color: #fff;
+  background-color: #D68A59; /* Semi-transparent buttons for depth */
+  border: none;
+  border-radius: 8px; /* More rounded corners for a softer look */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
