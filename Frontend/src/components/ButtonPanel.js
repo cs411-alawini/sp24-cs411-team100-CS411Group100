@@ -35,7 +35,7 @@ function ButtonPanel({ toggleTransactions, showTransactions, toggleLoans, accoun
         <ActionButton 
           label="Analyze" 
           className={`action-button analyze-button ${fontSizeClass}`}
-          onClick={() => setShowAnalyze(!showAnalyze)}  // Toggle the visibility of the analyze component
+          onClick={() => setShowAnalyze(!showAnalyze)} 
         />
         <ActionButton 
           label="Back to Accounts" 
@@ -45,7 +45,7 @@ function ButtonPanel({ toggleTransactions, showTransactions, toggleLoans, accoun
       </div>
       {showTransferForm && <TransferForm accountId={accountId} refreshBalance={refreshBalance} />}
       {showTransactions && <TransactionsDropdown accountId={accountId} />}
-      {showAnalyze && <AnalyzeDropdown accountId={accountId} />}  // Render the AnalyzeDropdown component based on state
+      {showAnalyze && <AnalyzeDropdown accountId={accountId} />} 
     </div>
   );
 }
