@@ -6,11 +6,9 @@
     align-items: center; /* This will vertically center your items in the header */
   }
   
-  .logo {
-    font-size: 24px; /* Example size, adjust as needed */
-    font-weight: bold; /* Makes the logo text bold */
-    color: #333; /* Dark color for the text, adjust as needed */
-    cursor: pointer; /* Changes the cursor to indicate the logo is clickable */
+  .logo-header img {
+    width: var(--logo-width);
+    height: auto; /* Keeps the aspect ratio intact */
   }
   
   .navigation {

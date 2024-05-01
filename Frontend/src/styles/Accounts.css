@@ -1,5 +1,5 @@
 .accounts-page {
-  background-color: #F0E68C; /* Adjust the color to match your design */
+  background: linear-gradient(to right, #eead62cc, #ffe8b2);
   min-height: 100vh; /* Ensure the page takes up full viewport height */
 }
 
