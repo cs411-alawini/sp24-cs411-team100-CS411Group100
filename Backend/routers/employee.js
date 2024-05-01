@@ -4,6 +4,6 @@ const employeeController= require("../controllers/employeeController")
 
 var router = express.Router();
 
-router.get('/', authController.isAuthenticated, employeeController.get)
+router.get('/insight', authController.isAuthenticated, employeeController.getDistrictFinancialAndCreditInsights)
 
 module.exports = router;
