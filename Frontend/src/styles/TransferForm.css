@@ -5,7 +5,7 @@
     width: 100%;
 }
 
-.notification {
+.transfer-notification {
     padding: 10px;
     margin: 10px auto; /* Center the notification horizontally */
     background-color: rgba(76, 175, 80, 0.7); /* Green color for successful notification */
@@ -14,10 +14,12 @@
     text-align: center;
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    justify-content: center;
   }
 
-.notification.failure {
+.transfer-notification.failure {
     background-color: rgba(244, 67, 54, 0.7);
+    justify-content: center;
 }
 
 .transfer-form input,

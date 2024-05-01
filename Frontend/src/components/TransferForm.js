@@ -127,7 +127,7 @@ function TransferForm({ accountId, refreshBalance }) {
         </select>
         <button type="submit">Submit Transfer</button>
       </form>
-      {notification && <div className={`notification ${notification === 'Transaction Failed' ? 'failure' : ''}`}>{notification}</div>}
+      {notification && <div className={`transfer-notification ${notification === 'Transaction Failed' ? 'failure' : ''}`}>{notification}</div>}
     </>
   );
 }
