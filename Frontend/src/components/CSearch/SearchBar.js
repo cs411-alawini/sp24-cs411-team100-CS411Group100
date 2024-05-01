@@ -1,22 +1,15 @@
 import { Button, ClickAwayListener } from "@mui/material";
 import React, { Component } from "react";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { filterQueriedData, searchNotifications } from "./Search";
-import { SearchBarProps, SearchBarState } from "./Search.constants";
 import SearchInputBar from "./SearchInputBar";
 import "./styles.scss";
 
-interface SearchBarWithTranslationProps extends WithTranslation { }
-type Props = SearchBarWithTranslationProps & SearchBarProps;
-
-class SearchBar extends Component<Props, SearchBarState>
-{
-    private requestId = 0;
-    private controller: any;
-    constructor(props: Props) {
+class SearchBar extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            isSearchIconSelected: false,
+            isSearchIconSelected: true,
             searchQuery: '',
             queriedDatas: null,
             filteredDatas: null,
@@ -24,13 +17,17 @@ class SearchBar extends Component<Props, SearchBarState>
             types: [],
             selectedFilterType: ''
         }
+        this.requestId = 0;
+        this.controller = null;
+        // Bind your method to the class instance
+        this.onOutsideClickSearch = this.onOutsideClickSearch.bind(this);
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         this.getCollectionAndTypes();
     }
 
-    resetSearchData = (resetQuery: boolean) => {
+    resetSearchData(resetQuery) {
         this.setState({
             searchQuery: resetQuery ? '' : this.state.searchQuery,
             queriedDatas: resetQuery ? null : this.state.queriedDatas,
@@ -38,13 +35,13 @@ class SearchBar extends Component<Props, SearchBarState>
         })
     }
 
-    componentDidUpdate = async (prevProps: Props, prevState: SearchBarState) => {
+    async componentDidUpdate(prevProps, prevState) {
         if (prevState.searchQuery !== this.state.searchQuery) {
             if (this.state.searchQuery.trim() !== '') {
                 if (this.controller)
                     this.controller.abort()
                 this.controller = new AbortController();
-                const response: any = await searchNotifications(this.state.searchQuery.toLowerCase(), this.requestId, this.controller.signal, this.props.searchCategory);
+                const response = await searchNotifications(this.state.searchQuery.toLowerCase(), this.requestId, this.controller.signal, this.props.searchCategory);
                 if (response.isSuccess && response.requestId === this.requestId) {
                     this.setState({ queriedDatas: response.response, filteredDatas: response.response })
                 }
@@ -64,52 +61,55 @@ class SearchBar extends Component<Props, SearchBarState>
         }
     }
 
-    setSelectedFilterType = (value: string) => {
+    setSelectedFilterType(value) {
         this.setState({ selectedFilterType: value });
     }
 
-    setSearchQuery = (value: string) => {
+    setSearchQuery(value) {
         this.requestId++;
         this.setState({ searchQuery: value });
     }
 
-    getCollectionAndTypes = () => {
-        let collections: string[] = [];
-        let types: any[] = [];
+    getCollectionAndTypes() {
+        let collections = [];
+        let types = [];
         if (this.props.searchCategory && this.props.searchCategory.length > 0) {
             this.props.searchCategory.forEach(category => {
-                collections.push(category.name)
-                if (category.subCategory !== null) {
-                    category.subCategory.forEach(subCategory => {
-                        types = types.concat(subCategory.value);
-                    })
-                }
-                else {
-                    types = types.concat([category.name]);
-                }
+                collections.push(category)
+                // types.push(category)
+
+                // if (category.subCategory !== null) {
+                //     category.subCategory.forEach(subCategory => {
+                //         types = types.concat(subCategory.value);
+                //     })
+                // }
+                // else {
+                //     types = types.concat([category.name]);
+                // }
             })
+            
         }
         this.setState({ collections: collections, types: types });
     }
 
-    setIsSearchIconSelected = (isSearchIconSelected: boolean) => {
+    setIsSearchIconSelected(isSearchIconSelected) {
         this.setState({ isSearchIconSelected });
         this.getCollectionAndTypes();
     }
-    onClickSearch = () => {
+    onClickSearch() {
         // Toggle sort selection
-        this.setIsSearchIconSelected(!this.state.isSearchIconSelected);
-    };
+        // this.setIsSearchIconSelected(!this.state.isSearchIconSelected);
+    }
 
-    onOutsideClickSearch = (event: any) => {
-        if (!this.findElement(event, 'search-container')) {
-            this.setIsSearchIconSelected(false);
-        }
-    };
+    onOutsideClickSearch(event) {
+        // if (!this.findElement(event, 'search-container')) {
+        //     this.setIsSearchIconSelected(false);
+        // }
+    }
 
-    findElement = (event: any, component: string) => {
+    findElement(event, component) {
         let returnValue = false;
-        event.composedPath().forEach((data: any) => {
+        event.composedPath().forEach((data) => {
             if (data.classList && data.classList.contains(component)) {
                 returnValue = true;
             }
@@ -133,13 +133,13 @@ class SearchBar extends Component<Props, SearchBarState>
                 </ClickAwayListener>
                 {isSearchIconSelected && (<>
                     <SearchInputBar
-                        setSearchQuery={this.setSearchQuery}
+                        setSearchQuery={(value) => this.setSearchQuery(value)}
                         queriedDatas={filteredDatas}
                         collections={collections}
                         types={types}
                         placeholder={this.props.placeholder}
-                        setSelectedFilterType={this.setSelectedFilterType}
-                        resetSearchData={this.resetSearchData}
+                        setSelectedFilterType={(value) => this.setSelectedFilterType(value)}
+                        resetSearchData={(resetQuery) => this.resetSearchData(resetQuery)}
                         setSelectedOption={setSelectedOption}
                     />
                 </>

@@ -1,18 +1,12 @@
-import { fetchReq } from "../../../../services/http";
-import serviceURLs from "../../../../services/serviceUrls";
-import { searchCategory } from "./types";
-const {
-    searchUrl,
-} = serviceURLs;
+import { fetchReq } from "../services/http";
 
-export const searchNotifications = async (searchQuery: string, requestId: number, signal: any, searchCategory: searchCategory[]) => {
+export const searchNotifications = async (searchQuery, requestId, signal, searchCategory) => {
     try {
         let query = '';
         searchCategory.forEach((category, i) => {
-            query += ((i !== 0) ? ',' : '') + category.name;
+            query += ((i !== 0) ? ',' : '') + category;
         })
-        let url = searchUrl(searchQuery.trim()) + query;
-        var response = await fetchReq(url, {
+        var response = await fetchReq('http://localhost:8000/api/search?searchKey='+searchQuery + '&searchAttribute='+ query, {
             method: "GET",
             signal: signal
         });
@@ -32,7 +26,7 @@ export const searchNotifications = async (searchQuery: string, requestId: number
     }
 }
 
-export const filterQueriedData = (filterType: string, queriedData: any) => {
+export const filterQueriedData = (filterType, queriedData) => {
     switch (filterType) {
         case 'employees':
             return { employees: queriedData[filterType] };
