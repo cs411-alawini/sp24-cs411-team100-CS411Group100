@@ -6,7 +6,7 @@ export const EmbedLiveboard = () => {
 React.useEffect(() => {
 const embed = new AppEmbed("#full-embed", {
     frameParams: {},
-    path: "pinboard/22e79c21-eec4-40bf-997b-7454c6e3a2a5",
+    path: "pinboard/41aa543a-18b6-421b-8838-a53932c4d78a",
     disabledActions: [],
     disabledActionReason: "Reason for disabling",
     hiddenActions: [
