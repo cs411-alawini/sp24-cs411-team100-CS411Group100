@@ -65,7 +65,7 @@ exports.amountTransfer = async (req,res) => {
         }
 
         // Call the stored procedure ProcessTransaction with the provided parameters
-        const query = `CALL cs411group100.ProcessTransaction(?, ?, ?, ?, ?)`;
+        const query = `CALL cs411group100.ProcessFinancialTransaction(?, ?, ?, ?, ?)`;
         const [results] = await mysqlDB.executeMySQLQuery(query, [SenderAccountID, ReceiverAccountID, TransferAmount, TransactionTypeID, TransactionModeID]);
 
         // If the transaction is successful, return success message
@@ -76,6 +76,7 @@ exports.amountTransfer = async (req,res) => {
             return res.status(400).json({ message: 'Transaction failed' });
         }
     } catch (error) {
+        await mysqlDB.executeMySQLQuery(`ROLLBACK`, [])
         // If an error occurs, return internal server error
         console.error('Error transferring amount:', error);
         return res.status(500).json({ message: 'Internal server error' });
