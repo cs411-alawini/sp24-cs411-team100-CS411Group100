@@ -1,0 +1,45 @@
+/* LoansDisplay.css */
+.loans-display {
+    display: flex;
+    overflow-x: auto;  /* Allows horizontal scrolling for multiple loan items */
+    align-items: center;
+    justify-content: center; /* Centers items horizontally */
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%; /* Takes up the whole width */
+}
+
+.loan-item {
+    background-color: #D68A59; /* Styling similar to other button elements */
+    padding: 10px 20px;
+    margin-right: var(--button-spacing, 10px); /* Variable margin, default is 10px */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center; /* Align text to the left inside the button */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Hides text that overflows the button's width */
+    text-overflow: ellipsis; /* Adds an ellipsis to indicate clipped text */
+    min-width: 0; /* Ensures flex items shrink as needed */
+}
+
+.loan-item:hover {
+    background-color: #c77a50; /* Darker shade on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.loan-item:last-child {
+    margin-right: 0; /* Remove margin for the last item */
+}
+
+.loan-item-id {
+    font-weight: bold; /* Make text bold */
+}
+
+.loan-item-detail {
+    font-size: 0.9em; /* Slightly smaller font size for details */
+}  

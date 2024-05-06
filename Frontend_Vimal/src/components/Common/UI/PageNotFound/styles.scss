@@ -1,0 +1,29 @@
+.data-not-found {
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .data-not-found__text {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.6;
+    text-align: center;
+    color: #333333;
+  }
+
+  .nodata-additional-message {
+    font-size: 14px;
+    line-height: 1.43;
+    text-align: center;
+    color: #333333;
+    padding-top: 5px;
+  }
+
+  .nodata-icon-container {
+    height: 72px;
+    width: 72px;
+    margin-bottom: 16px;
+  }
+}

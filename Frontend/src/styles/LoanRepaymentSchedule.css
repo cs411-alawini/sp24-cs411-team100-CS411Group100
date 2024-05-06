@@ -1,0 +1,81 @@
+/* LoanRepaymentSchedule.css */
+.repayment-container {
+    width: 90%;  /* Set the width as desired, independent of LoansDisplay */
+    margin: 20px auto; /* Center the container and give it some margin from other components */
+    padding: 10px; /* Optional padding to create space inside the container */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.repayment-schedule {
+    display: block; /* Ensure it acts as a block element for vertical stacking */
+    position: relative;
+    z-index: 100;
+    /* background: #D68A59; */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-height: 60vh;
+    overflow-y: auto;
+    width: 100%; /* Full width relative to its new container */
+    color: white;
+}
+
+.repayment-header,
+.repayment-item {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+.repayment-header {
+    /* background-color: #c66829fd; */
+    font-weight: bold;
+}
+
+.repayment-item {
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+}
+
+.paid {
+    background-color: #4CAF50;
+}
+
+.not-paid {
+    background-color: #ae1e13;
+}
+
+.loan-repayment-item-header{
+    border-bottom: 1px solid #ccc;
+    background-color: #c66829fd;
+    transition: background-color 0.3s;
+    text-align: center;
+    font-weight: bold;
+    padding: 15px;
+    color: white;
+  
+  }
+  
+.loan-repayment-value{
+    /* border-bottom: 1px solid #ccc; */
+    transition: background-color 0.3s;
+    text-align: center;
+    padding: 15px;
+    color: white;
+
+}
+.loan-repayment-item{
+    /* border-bottom: 1px solid #ccc; */
+    transition: background-color 0.3s;
+    text-align: center;
+
+}
+
+.loan-repayment-item:hover {
+    background-color: #c77a50; /* Darker shade on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}

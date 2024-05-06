@@ -1,0 +1,96 @@
+.transactions-dropdown {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 20px;
+  top: 50%;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #D68A59;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.transaction-item,
+.transaction-item-header {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.transaction-item {
+  border-bottom: 1px solid #ccc;
+  padding: 15px;
+  transition: background-color 0.3s; /* Smooth background transition for hover effect */
+}
+
+.transaction-item:hover {
+  background-color: #b9724f; /* Slightly darker on hover */
+  cursor: pointer;
+}
+
+.transaction-item-header {
+  background-color: #c66829fd;
+  text-align: center;
+  font-weight: bold;
+  padding: 15px;
+  color: white;
+}
+
+.transaction-detail-label,
+.transaction-detail-value {
+  text-align: left;
+  padding: 5px 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+}
+
+.transaction-category {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Scrollbar styles */
+.transactions-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.transactions-dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.transactions-dropdown::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.transactions-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Error message styling */
+.error {
+  color: #ff4242;
+  background: #ffecec;
+  border-left: 5px solid #ff0000;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 600px) {
+  .transaction-item,
+  .transaction-item-header {
+    grid-template-columns: repeat(3, 1fr); /* Adjusts to 3 columns on smaller screens */
+    padding: 10px; /* Smaller padding for items */
+  }
+  .transaction-detail-label,
+  .transaction-detail-value {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+}

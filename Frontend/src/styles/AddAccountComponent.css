@@ -1,0 +1,85 @@
+/* Styling for the input container and form elements */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+}
+
+.input-row {
+    display: flex;  /* Ensures elements within input-row are lined up horizontally */
+    align-items: center; /* Centers items vertically */
+    width: 100%;
+    padding: 10px 0;
+    justify-content: center;
+    gap: 1%;
+    margin-bottom: -50px;
+    margin-top: -50px;
+}
+
+/* Input fields, selects, and buttons */
+.input-container input,
+.input-container select,
+.input-container button {
+    padding: 8px;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    max-width: 200px; /* Limits the width of the input fields */
+}
+
+.input-container select {
+    width: auto; /* Allows the select element to grow as needed */
+    flex-grow: 1; /* Takes up remaining space in the flex container */
+}
+
+.district-input {
+    width: 10%; /* You can adjust this value to manage the dropdown width */
+}
+
+/* Button styling for form submission */
+.input-container button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+    max-width: 200px; /* Adjust as needed */
+    width: auto;
+}
+
+/* Notification styling for success and error messages */
+.notification {
+    padding: 10px;
+    margin: 10px auto;
+    background-color: rgba(76, 175, 80, 0.7);
+    color: white;
+    width: fit-content;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notification.failure {
+    background-color: rgba(244, 67, 54, 0.7);
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 600px) {
+    .input-container input,
+    .input-container select,
+    .input-container button {
+        width: 100%;
+    }
+
+    .input-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .district-input {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
