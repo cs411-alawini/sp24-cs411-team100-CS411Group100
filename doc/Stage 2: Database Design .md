@@ -1,6 +1,6 @@
 # DollarIQ: Database Design
 
-<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/schema.png" alt="Alt text" width="900">
+<img src="https://github.com/cs411-alawini/sp24-cs411-team100-CS411Group100/blob/main/images/schema.png" alt="Alt text" width="1000">
 
 ## Entities Explanation
 
